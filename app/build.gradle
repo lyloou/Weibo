@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.lyloou.weibo"
+        applicationId "com.lyloou.com.lyloou.weibo.weibo.weibo"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
@@ -19,7 +19,7 @@ android {
     }
     sourceSets {
         main {
-            java.srcDirs = ['src/main/java', 'src/main/java/com/lyloou/test', 'src/main/java/com/lyloou/weibo/control', 'src/main/java/com/lyloou/weibo/view', 'src/main/java/com/lyloou/weibo/test', 'src/main/java/com/lyloou/weibo/model']
+            java.srcDirs = ['src/main/java', 'src/main/java/com/lyloou/test', 'src/main/java/com/lyloou/com.lyloou.weibo.weibo.weibo/control', 'src/main/java/com/lyloou/com.lyloou.weibo.weibo.weibo/view', 'src/main/java/com/lyloou/com.lyloou.weibo.weibo.weibo/test', 'src/main/java/com/lyloou/com.lyloou.weibo.weibo.weibo/model']
         }
     }
 }

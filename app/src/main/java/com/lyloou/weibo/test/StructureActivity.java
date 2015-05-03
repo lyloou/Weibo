@@ -13,12 +13,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lyloou.weibo.R;
 import com.lyloou.weibo.control.MainService;
 import com.lyloou.weibo.model.Task;
 import com.lyloou.weibo.view.IWeiboActivity;
+import com.lyloou.weibo.R;
 
-public class StructureActivity extends Activity implements IWeiboActivity{
+public class StructureActivity extends Activity implements IWeiboActivity {
 
 	protected static final String TAG = "Weibo";
 	private Button logBtn;

@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.lyloou.weibo.view.WelcomeActivity"
+            android:name=".view.WelcomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,13 +21,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.lyloou.weibo.view.LoginActivity" />
-        <service android:name="com.lyloou.weibo.control.MainService" />
+        <activity android:name=".view.LoginActivity" />
+        <service android:name=".control.MainService" />
 
-        <activity android:name="com.lyloou.weibo.test.StructureActivity" />
-        <activity android:name="com.lyloou.weibo.test.Handler_Activity" />
-        <activity android:name="com.lyloou.weibo.test.Service_Activity" />
-        <service android:name="com.lyloou.weibo.test.MyService" >
+        <activity android:name=".test.StructureActivity" />
+        <activity android:name=".test.Handler_Activity" />
+        <activity android:name=".test.Service_Activity" />
+        <service android:name=".test.MyService" >
         </service>
     </application>
 

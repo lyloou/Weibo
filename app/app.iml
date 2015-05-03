@@ -54,10 +54,10 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/aidl" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/lyloou/test" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/lyloou/weibo/control" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/lyloou/weibo/view" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/lyloou/weibo/test" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/lyloou/weibo/model" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/lyloou/com.lyloou.weibo.weibo.weibo/control" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/lyloou/com.lyloou.weibo.weibo.weibo/view" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/lyloou/com.lyloou.weibo.weibo.weibo/test" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java/com/lyloou/com.lyloou.weibo.weibo.weibo/model" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
