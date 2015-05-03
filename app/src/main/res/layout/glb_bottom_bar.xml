@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_tab_bottom_rlyt"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="#f0f0f0" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/id_glb_bottom_home_llyt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/id_glb_bottom_home_image_ibtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:clickable="false"
+                android:src="@mipmap/glb_bottom_home_normal" />
+
+            <TextView
+                android:id="@+id/id_glb_bottom_home_text_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/glb_bottom_home"
+                android:textSize="@dimen/glb_bottom_bar_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_glb_bottom_trade_record_llyt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/id_glb_bottom_trade_record_ibtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:clickable="false"
+                android:src="@mipmap/glb_bottom_trade_record_normal" />
+
+            <TextView
+                android:id="@+id/id_glb_bottom_trade_record_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/glb_bottom_trade_record"
+                android:textSize="@dimen/glb_bottom_bar_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_glb_bottom_money_record_llyt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/id_glb_bottom_money_record_ibtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:clickable="false"
+                android:src="@mipmap/glb_bottom_money_record_normal" />
+
+            <TextView
+                android:id="@+id/id_glb_bottom_money_record_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/glb_bottom_money_record"
+                android:textSize="@dimen/glb_bottom_bar_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_glb_bottom_customer_service_llyt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:descendantFocusability="beforeDescendants"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:id="@+id/id_glb_bottom_customer_server_ibtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#0000"
+                android:clickable="false"
+                android:src="@mipmap/glb_bottom_customer_service_normal" />
+
+            <TextView
+                android:id="@+id/id_glb_bottom_customer_server_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/glb_bottom_custome_service"
+                android:textSize="@dimen/glb_bottom_bar_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

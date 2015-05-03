@@ -11,13 +11,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.lyloou.weibo.R;
-import com.lyloou.weibo.test.MyService.MyBinder;
 
 public class Service_Activity extends Activity implements OnClickListener{
 
 	private ServiceConnection conn = new ServiceConnection() {
 
-		private MyBinder mBind;
+		private MyService.MyBinder mBind;
 
 		@Override
 		public void onServiceDisconnected(ComponentName name) {

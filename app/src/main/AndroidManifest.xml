@@ -22,6 +22,7 @@
         </activity>
 
         <activity android:name=".view.LoginActivity" />
+        <activity android:name=".view.MainActivity" />
         <service android:name=".control.MainService" />
 
         <activity android:name=".test.StructureActivity" />

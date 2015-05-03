@@ -4,4 +4,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="user_head">用户图像</string>
+    <string name="glb_bottom_home">主页</string>
+    <string name="glb_bottom_trade_record">交易记录</string>
+    <string name="glb_bottom_money_record">资金记录</string>
+    <string name="glb_bottom_custome_service">客户服务</string>
 </resources>
