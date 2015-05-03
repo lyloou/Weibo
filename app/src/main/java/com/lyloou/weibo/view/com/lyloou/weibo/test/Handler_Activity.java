@@ -17,12 +17,12 @@ public class Handler_Activity extends Activity {
 	TextView tv;
 	int mIndex = 0;
 	Handler handler = new Handler() {
-		public void handleMessage(Message msg) {
+		public void handleMessage(android.os.Message msg) {
 			if (msg.what == 1) {
 				String text = msg.obj.toString();
 				tv.setText(text);
 			}
-		};
+		}
 	};
 
 	@Override
@@ -37,16 +37,16 @@ public class Handler_Activity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				// ���������˯�߻����ʱ�����ͻ����
+				// 如果在这里睡眠或处理耗时操作就会崩溃
 				/*
 				 * try { Thread.sleep(3000); } catch (InterruptedException e) {
 				 * e.printStackTrace(); }
 				 */
 				mIndex++;
-				Log.d(TAG, "�ұ������Ŷ!" + mIndex);
+				Log.d(TAG, "我被点击了哦!" + mIndex);
 				new Thread() {
 					public void run() {
-						// �����߳�������Ͳ������
+						// 在子线程这里里就不会崩溃
 						try {
 							Thread.sleep(3000);
 						} catch (InterruptedException e) {
@@ -57,7 +57,7 @@ public class Handler_Activity extends Activity {
 						msg.obj = " aLouAll";
 						msg.sendToTarget();
 
-					};
+					}
 				}.start();
 			}
 		});

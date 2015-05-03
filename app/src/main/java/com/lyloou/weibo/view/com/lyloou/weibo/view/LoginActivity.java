@@ -17,7 +17,7 @@ public class LoginActivity extends Activity implements IWeiboActivity {
 		public void handleMessage(android.os.Message msg) {
 			if (msg.what == 1) {
 			}
-		};
+		}
 	};
 
 	@Override
@@ -37,7 +37,7 @@ public class LoginActivity extends Activity implements IWeiboActivity {
 
 			@Override
 			public void onClick(View v) {
-				
+
 			}
 		});
 

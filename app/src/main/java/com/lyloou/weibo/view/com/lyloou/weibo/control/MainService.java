@@ -16,36 +16,36 @@ import com.lyloou.weibo.model.Task;
 import com.lyloou.weibo.view.IWeiboActivity;
 
 public class MainService extends Service implements Runnable {
-	
-	
-	
+
+
+
 	private static final String TAG = "Weibo";
-	private static Queue<Task> mTasks =new LinkedList<Task>();;
-	private static ArrayList<Activity> mLists = new ArrayList<Activity>();;
+	private static Queue<Task> mTasks =new LinkedList<Task>();
+	private static ArrayList<Activity> mLists = new ArrayList<Activity>();
 	private boolean flag;
 	private Handler handler = new Handler(){
-		public void handleMessage(Message msg) {
+		public void handleMessage(android.os.Message msg) {
 			switch(msg.what){
-			case Task.WEIBO_LOGIN:
-				Log.d(TAG, "������case" +"msg��ֵ��"+msg.obj.toString());
-				IWeiboActivity activity = (IWeiboActivity)getActivityByName("com.lyloou.weibo.view.LoginActivity");
-				activity.refresh(msg.obj);
-				break;
-				
+				case Task.WEIBO_LOGIN:
+					Log.d(TAG, "进入了case" +"msg的值是"+msg.obj.toString());
+					IWeiboActivity activity = (IWeiboActivity)getActivityByName("LoginActivity");
+					activity.refresh(msg.obj);
+					break;
+
 			}
-		};
+		}
 	};
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		Log.d(TAG, "ִ����onStartCommand");
+		Log.d(TAG, "执行了onStartCommand");
 		return super.onStartCommand(intent, flags, startId);
 	}
 
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
-		Log.d(TAG, "ֹͣ�˷���,ִ����onDestroy");
+		Log.d(TAG, "停止了服务,执行了onDestroy");
 		super.onDestroy();
 	}
 
@@ -55,7 +55,7 @@ public class MainService extends Service implements Runnable {
 		while(flag){
 			task = mTasks.poll();
 			if(task!=null){
-				
+
 				doTask(task);
 			}
 			try {
@@ -67,36 +67,36 @@ public class MainService extends Service implements Runnable {
 	}
 
 	protected Activity getActivityByName(String string) {
-		Log.d(TAG, "������getActivityByName");
+		Log.d(TAG, "进入了getActivityByName");
 		if(mLists!=null){
 			for(Activity activity : mLists){
 				if(activity.getClass().getName().indexOf(string)>0){
-					Log.d(TAG, "ȥ����ֵActivity");
+					Log.d(TAG, "去到了值Activity");
 					return activity;
 				}
 			}
 		}
-		Log.d(TAG, "����û��ȥ��ֵ��getActivityByName");
+		Log.d(TAG, "但是没有去到值了getActivityByName");
 		return null;
 	}
 
 	public static void addActivity(Activity activity){
 		mLists.add(activity);
 	}
-	
-	// ��������
+
+	// 处理任务
 	private void doTask(Task task) {
-		Log.d(TAG, "ִ����һ������");
+		Log.d(TAG, "执行了一次任务");
 		Message msg = handler.obtainMessage();
 		msg.what = task.getTaskId();
-		msg.obj = "��½�ɹ�";
+		msg.obj = "登陆成功";
 		msg.sendToTarget();
 	}
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		Log.d(TAG, "MainServiceִ����");
+		Log.d(TAG, "MainService执行了");
 		flag = true;
 		new Thread(this).start();
 	}

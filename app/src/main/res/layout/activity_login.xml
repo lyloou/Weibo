@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="26dp"
@@ -10,14 +9,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:background="@drawable/login_pick_user_spinner_border" >
 
-        <Spinner
-            android:id="@+id/id_login_spinner"
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="match_parent" />
+
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/login_pick_user_spinner_selector" >
-        </Spinner>
+            android:src="@drawable/login__user_selector"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,8 +29,8 @@
         android:layout_marginBottom="16dp"
         android:gravity="center" >
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:background="@drawable/login_pick_user_spinner_border"
         android:gravity="center" >
 
@@ -38,7 +41,8 @@
             android:layout_marginRight="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="4dp"
-            android:src="@mipmap/login_user_picture" >
+            android:src="@mipmap/login_user_picture"
+            android:contentDescription="@string/user_head">
         </ImageView>
     </LinearLayout>
 </LinearLayout>
@@ -46,14 +50,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/id_login_spinner_ll"
-        android:layout_marginBottom="16dp"
         android:gravity="center"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/id_login_btn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:text="登		陆" />
@@ -73,6 +76,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
+        android:textColor="#444499"
+        android:textSize="14sp"
         android:gravity="center"
         android:text="提示:首次使用请点击「添加用户」按钮" />
 
