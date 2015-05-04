@@ -11,13 +11,13 @@ public class FactoryFragment {
             	fragment = new HomeFragment();  
                 break;  
             case 1:  
-                fragment = new TradeRecordGVFragment();  
+                fragment = new MineFragment();
                 break;  
             case 2:  
-                fragment = new MoneyRecordFragment();  
+                fragment = new MessageFragment();
                 break;  
             case 3:  
-            	fragment = new CustomerServiceFragment();  
+            	fragment = new SettingFragment();
                 break;  
         }  
         return fragment;  

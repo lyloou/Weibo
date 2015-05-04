@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.lyloou.weibo.R;
 
-public class TradeRecordGVFragment extends BaseFragment{
+public class MineFragment extends BaseFragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

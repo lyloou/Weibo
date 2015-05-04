@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.lyloou.weibo.R;
 
-public class CustomerServiceFragment extends BaseFragment {
+public class SettingFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

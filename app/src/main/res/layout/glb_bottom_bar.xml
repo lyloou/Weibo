@@ -36,7 +36,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/id_glb_bottom_trade_record_llyt"
+            android:id="@+id/id_glb_bottom_mine_llyt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -45,15 +45,15 @@
             android:orientation="vertical" >
 
             <ImageButton
-                android:id="@+id/id_glb_bottom_trade_record_ibtn"
+                android:id="@+id/id_glb_bottom_mine_image_ibtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#0000"
                 android:clickable="false"
-                android:src="@mipmap/glb_bottom_trade_record_normal" />
+                android:src="@mipmap/glb_bottom_message_normal" />
 
             <TextView
-                android:id="@+id/id_glb_bottom_trade_record_tv"
+                android:id="@+id/id_glb_bottom_mine_text_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/glb_bottom_trade_record"
@@ -61,7 +61,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/id_glb_bottom_money_record_llyt"
+            android:id="@+id/id_glb_bottom_message_llyt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -70,15 +70,15 @@
             android:orientation="vertical" >
 
             <ImageButton
-                android:id="@+id/id_glb_bottom_money_record_ibtn"
+                android:id="@+id/id_glb_bottom_message_image_ibtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#0000"
                 android:clickable="false"
-                android:src="@mipmap/glb_bottom_money_record_normal" />
+                android:src="@mipmap/glb_bottom_message_normal" />
 
             <TextView
-                android:id="@+id/id_glb_bottom_money_record_tv"
+                android:id="@+id/id_glb_bottom_message_text_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/glb_bottom_money_record"
@@ -86,7 +86,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/id_glb_bottom_customer_service_llyt"
+            android:id="@+id/id_glb_bottom_setting_llyt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -95,15 +95,15 @@
             android:orientation="vertical" >
 
             <ImageButton
-                android:id="@+id/id_glb_bottom_customer_server_ibtn"
+                android:id="@+id/id_glb_bottom_setting_image_ibtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#0000"
                 android:clickable="false"
-                android:src="@mipmap/glb_bottom_customer_service_normal" />
+                android:src="@mipmap/glb_bottom_setting_normal" />
 
             <TextView
-                android:id="@+id/id_glb_bottom_customer_server_tv"
+                android:id="@+id/id_glb_bottom_setting_text_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/glb_bottom_custome_service"

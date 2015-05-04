@@ -20,16 +20,16 @@ import com.lyloou.weibo.R;
 
 public class MainActivity extends Activity implements OnClickListener {
     private LinearLayout mTabBtnHome;
-    private LinearLayout mTabBtnTradeRecord;
-    private LinearLayout mTabBtnMoneyRecord;
-    private LinearLayout mTabBtnCustomerService;
+    private LinearLayout mTabBtnMine;
+    private LinearLayout mTabBtnMessage;
+    private LinearLayout mTabBtnSetting;
     private FragmentManager fragmentManager;
     private ImageButton trade_record_ibtn;
 
     private Fragment mHomeFragment;
-    private Fragment mTradeRecordFragment;
-    private Fragment mCustomerServiceFragment;
-    private Fragment mMoneyRecordFragment;
+    private Fragment mMineFragment;
+    private Fragment mMessageFragment;
+    private Fragment mSettingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +72,14 @@ public class MainActivity extends Activity implements OnClickListener {
     /* 初始化底部视图和点击监听器 */
     private void initView() {
         mTabBtnHome = (LinearLayout) findViewById(R.id.id_glb_bottom_home_llyt);
-        mTabBtnTradeRecord = (LinearLayout) findViewById(R.id.id_glb_bottom_trade_record_llyt);
-        mTabBtnMoneyRecord = (LinearLayout) findViewById(R.id.id_glb_bottom_money_record_llyt);
-        mTabBtnCustomerService = (LinearLayout) findViewById(R.id.id_glb_bottom_customer_service_llyt);
+        mTabBtnMine = (LinearLayout) findViewById(R.id.id_glb_bottom_mine_llyt);
+        mTabBtnMessage = (LinearLayout) findViewById(R.id.id_glb_bottom_message_llyt);
+        mTabBtnSetting = (LinearLayout) findViewById(R.id.id_glb_bottom_setting_llyt);
 
         mTabBtnHome.setOnClickListener(this);
-        mTabBtnTradeRecord.setOnClickListener(this);
-        mTabBtnMoneyRecord.setOnClickListener(this);
-        mTabBtnCustomerService.setOnClickListener(this);
+        mTabBtnMine.setOnClickListener(this);
+        mTabBtnMessage.setOnClickListener(this);
+        mTabBtnSetting.setOnClickListener(this);
     }
 
     // 设置点击事件
@@ -90,15 +90,15 @@ public class MainActivity extends Activity implements OnClickListener {
                 selectTab(0);
                 break;
 
-            case R.id.id_glb_bottom_trade_record_llyt:
+            case R.id.id_glb_bottom_mine_llyt:
                 selectTab(1);
                 break;
 
-            case R.id.id_glb_bottom_money_record_llyt:
+            case R.id.id_glb_bottom_message_llyt:
                 selectTab(2);
                 break;
 
-            case R.id.id_glb_bottom_customer_service_llyt:
+            case R.id.id_glb_bottom_setting_llyt:
                 selectTab(3);
                 break;
 
@@ -113,6 +113,7 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     /* 启用相对的fragment */
+    /* 根据i来实例化fragment,用来替换当前的内容「id_glb_content_flyt」 */
     private void selectTab(int i) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         hideFragments(transaction);
@@ -126,31 +127,31 @@ public class MainActivity extends Activity implements OnClickListener {
                 }
                 break;
             case 1:
-                if (mTradeRecordFragment == null) {
-                    mTradeRecordFragment = FactoryFragment.getInstanceByIndex(1);
-                    transaction.add(R.id.id_glb_content_flyt, mTradeRecordFragment);
+                if (mMineFragment == null) {
+                    mMineFragment = FactoryFragment.getInstanceByIndex(1);
+                    transaction.add(R.id.id_glb_content_flyt, mMineFragment);
                 } else {
-                    transaction.show(mTradeRecordFragment);
+                    transaction.show(mMineFragment);
                 }
                 break;
             case 2:
-                if (mMoneyRecordFragment == null) {
-                    mMoneyRecordFragment = FactoryFragment.getInstanceByIndex(2);
-                    transaction.add(R.id.id_glb_content_flyt, mMoneyRecordFragment);
+                if (mMessageFragment == null) {
+                    mMessageFragment = FactoryFragment.getInstanceByIndex(2);
+                    transaction.add(R.id.id_glb_content_flyt, mMessageFragment);
                 } else {
-                    transaction.show(mMoneyRecordFragment);
+                    transaction.show(mMessageFragment);
                 }
                 break;
             case 3:
-                if (mCustomerServiceFragment == null) {
-                    mCustomerServiceFragment = FactoryFragment.getInstanceByIndex(3);
-                    transaction.add(R.id.id_glb_content_flyt, mCustomerServiceFragment);
+                if (mSettingFragment == null) {
+                    mSettingFragment = FactoryFragment.getInstanceByIndex(3);
+                    transaction.add(R.id.id_glb_content_flyt, mSettingFragment);
                 } else {
-                    transaction.show(mCustomerServiceFragment);
+                    transaction.show(mSettingFragment);
                 }
                 break;
         }
-        /* 根据i来实例化fragment,用来替换当前的内容「id_glb_content_flyt」 */
+
 
 		/* 对 选中tab更改图片和更改文字颜色 */
         changeView(i);
@@ -161,25 +162,25 @@ public class MainActivity extends Activity implements OnClickListener {
         if (mHomeFragment != null) {
             transaction.hide(mHomeFragment);
         }
-        if (mTradeRecordFragment != null) {
-            transaction.hide(mTradeRecordFragment);
+        if (mMineFragment != null) {
+            transaction.hide(mMineFragment);
         }
-        if (mMoneyRecordFragment != null) {
-            transaction.hide(mMoneyRecordFragment);
+        if (mMessageFragment != null) {
+            transaction.hide(mMessageFragment);
         }
-        if (mCustomerServiceFragment != null) {
-            transaction.hide(mCustomerServiceFragment);
+        if (mSettingFragment != null) {
+            transaction.hide(mSettingFragment);
         }
 
     }
 
     /* 为选中的tab更改图片和更改文字颜色 */
     private void changeView(int i) {
-		/* 重置按钮颜色 */
+        /* 重置按钮颜色 */
         resetBtn();
-		/* 重置文字颜色 */
+        /* 重置文字颜色 */
         resetText();
-		/* 设置选中的按钮颜色和文字颜色 */
+        /* 设置选中的按钮颜色和文字颜色 */
         switch (i) {
             case 0:
                 ((ImageButton) mTabBtnHome
@@ -190,27 +191,27 @@ public class MainActivity extends Activity implements OnClickListener {
                         .setTextColor(Color.rgb(255, 126, 71));
                 break;
             case 1:
-                ((ImageButton) mTabBtnTradeRecord
-                        .findViewById(R.id.id_glb_bottom_trade_record_ibtn))
-                        .setImageResource(R.mipmap.glb_bottom_money_record_pressed);
-                ((TextView) mTabBtnTradeRecord
-                        .findViewById(R.id.id_glb_bottom_trade_record_tv))
+                ((ImageButton) mTabBtnMine
+                        .findViewById(R.id.id_glb_bottom_mine_image_ibtn))
+                        .setImageResource(R.mipmap.glb_bottom_mine_pressed);
+                ((TextView) mTabBtnMine
+                        .findViewById(R.id.id_glb_bottom_mine_text_tv))
                         .setTextColor(Color.rgb(255, 126, 71));
                 break;
             case 2:
-                ((ImageButton) mTabBtnMoneyRecord
-                        .findViewById(R.id.id_glb_bottom_money_record_ibtn))
-                        .setImageResource(R.mipmap.glb_bottom_trade_record_pressed);
-                ((TextView) mTabBtnMoneyRecord
-                        .findViewById(R.id.id_glb_bottom_money_record_tv))
+                ((ImageButton) mTabBtnMessage
+                        .findViewById(R.id.id_glb_bottom_message_image_ibtn))
+                        .setImageResource(R.mipmap.glb_bottom_message_pressed);
+                ((TextView) mTabBtnMessage
+                        .findViewById(R.id.id_glb_bottom_message_text_tv))
                         .setTextColor(Color.rgb(255, 126, 71));
                 break;
             case 3:
-                ((ImageButton) mTabBtnCustomerService
-                        .findViewById(R.id.id_glb_bottom_customer_server_ibtn))
-                        .setImageResource(R.mipmap.glb_bottom_customer_service_pressed);
-                ((TextView) mTabBtnCustomerService
-                        .findViewById(R.id.id_glb_bottom_customer_server_tv))
+                ((ImageButton) mTabBtnSetting
+                        .findViewById(R.id.id_glb_bottom_setting_image_ibtn))
+                        .setImageResource(R.mipmap.glb_bottom_setting_pressed);
+                ((TextView) mTabBtnSetting
+                        .findViewById(R.id.id_glb_bottom_setting_text_tv))
                         .setTextColor(Color.rgb(255, 126, 71));
         }
 
@@ -222,17 +223,17 @@ public class MainActivity extends Activity implements OnClickListener {
                 .findViewById(R.id.id_glb_bottom_home_image_ibtn))
                 .setImageResource(R.mipmap.glb_bottom_home_normal);
 
-        ((ImageButton) mTabBtnTradeRecord
-                .findViewById(R.id.id_glb_bottom_trade_record_ibtn))
-                .setImageResource(R.mipmap.glb_bottom_money_record_normal);
+        ((ImageButton) mTabBtnMine
+                .findViewById(R.id.id_glb_bottom_mine_image_ibtn))
+                .setImageResource(R.mipmap.glb_bottom_mine_normal);
 
-        ((ImageButton) mTabBtnMoneyRecord
-                .findViewById(R.id.id_glb_bottom_money_record_ibtn))
-                .setImageResource(R.mipmap.glb_bottom_trade_record_normal);
+        ((ImageButton) mTabBtnMessage
+                .findViewById(R.id.id_glb_bottom_message_image_ibtn))
+                .setImageResource(R.mipmap.glb_bottom_message_normal);
 
-        ((ImageButton) mTabBtnCustomerService
-                .findViewById(R.id.id_glb_bottom_customer_server_ibtn))
-                .setImageResource(R.mipmap.glb_bottom_customer_service_normal);
+        ((ImageButton) mTabBtnSetting
+                .findViewById(R.id.id_glb_bottom_setting_image_ibtn))
+                .setImageResource(R.mipmap.glb_bottom_setting_normal);
     }
 
     /* 重置文本颜色 */
@@ -240,16 +241,16 @@ public class MainActivity extends Activity implements OnClickListener {
         ((TextView) mTabBtnHome.findViewById(R.id.id_glb_bottom_home_text_tv))
                 .setTextColor(Color.rgb(102, 102, 102));
 
-        ((TextView) mTabBtnTradeRecord
-                .findViewById(R.id.id_glb_bottom_trade_record_tv))
+        ((TextView) mTabBtnMine
+                .findViewById(R.id.id_glb_bottom_mine_text_tv))
                 .setTextColor(Color.rgb(102, 102, 102));
 
-        ((TextView) mTabBtnMoneyRecord
-                .findViewById(R.id.id_glb_bottom_money_record_tv))
+        ((TextView) mTabBtnMessage
+                .findViewById(R.id.id_glb_bottom_message_text_tv))
                 .setTextColor(Color.rgb(102, 102, 102));
 
-        ((TextView) mTabBtnCustomerService
-                .findViewById(R.id.id_glb_bottom_customer_server_tv))
+        ((TextView) mTabBtnSetting
+                .findViewById(R.id.id_glb_bottom_setting_text_tv))
                 .setTextColor(Color.rgb(102, 102, 102));
     }
 

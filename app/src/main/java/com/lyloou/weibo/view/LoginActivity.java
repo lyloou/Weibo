@@ -26,6 +26,7 @@ public class LoginActivity extends Activity implements IWeiboActivity {
 		setContentView(R.layout.activity_login);
 		Button loginBtn = (Button) findViewById(R.id.id_login_btn);
 		Button addUserBtn = (Button) findViewById(R.id.id_add_user_btn);
+
 		loginBtn.setOnClickListener(new OnClickListener() {
 
 			@Override

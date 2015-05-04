@@ -22,12 +22,12 @@ public class MainService extends Service implements Runnable {
     private static Queue<Task> mTasks = new LinkedList<Task>();
     private static ArrayList<Activity> mLists = new ArrayList<Activity>();
     private boolean flag;
-    private Handler  handler = new Handler() {
+    private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case Task.WEIBO_LOGIN:
                     Log.d(TAG, "进入了case" + "msg的值是" + msg.obj.toString());
-                    IWeiboActivity activity = (IWeiboActivity) getActivityByName("LoginActivity");
+                    IWeiboActivity activity = (IWeiboActivity) getActivityByName("StructureActivity");
                     activity.refresh(msg.obj);
                     break;
 
