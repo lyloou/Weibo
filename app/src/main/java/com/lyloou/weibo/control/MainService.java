@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
@@ -91,6 +92,10 @@ public class MainService extends Service implements Runnable {
         msg.what = task.getTaskId();
         msg.obj = "登陆成功";
         msg.sendToTarget();
+
+        Message m2 = Message.obtain();
+        HandlerThread handlerThread = new HandlerThread("当前线程是子线程1");
+        Handler handler2 = new Handler(handlerThread.getLooper());
     }
 
     @Override

@@ -5,35 +5,41 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".view.WelcomeActivity"
-            android:label="@string/app_name" >
-
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.MainActivity" />
+
         <service android:name=".control.MainService" />
 
-        <activity android:name=".test.StructureActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".test.Handler_Activity" >
+        <activity android:name=".test.StructureActivity">
 
         </activity>
-        <activity android:name=".test.Service_Activity" />
-        <service android:name=".test.MyService" >
-        </service>
+        <activity android:name=".test.Handler_Activity">
+
+        </activity>
+        <activity android:name=".test.Service_Activity">
+
+        </activity>
+
+        <activity android:name=".view.AuthActivity">
+
+        </activity>
+
+
+        <service android:name=".test.MyService"></service>
     </application>
 
 </manifest>

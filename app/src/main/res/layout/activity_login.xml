@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:id="@+id/id_login_spinner_ll"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@drawable/login_pick_user_spinner_border"
@@ -14,12 +14,17 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="160dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="aLouAll"
+            android:gravity="center"
+            android:textSize="16sp"
             android:layout_height="match_parent" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:src="@drawable/login__user_selector" />
     </LinearLayout>
 
@@ -27,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/id_login_spinner_ll"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="26dp"
         android:gravity="center">
 
         <LinearLayout
@@ -45,7 +50,7 @@
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="4dp"
                 android:contentDescription="@string/user_head"
-                android:src="@mipmap/login_user_picture"/>
+                android:src="@mipmap/louis"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -62,7 +67,6 @@
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:layout_gravity="center"
             android:text="登		陆" />
 
         <Button
@@ -70,7 +74,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-
             android:layout_weight="1"
             android:text="添加用户" />
     </LinearLayout>

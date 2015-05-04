@@ -51,7 +51,7 @@ public class WelcomeActivity extends Activity {
 
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+				Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
 				startActivity(intent);
 			}
 		});
