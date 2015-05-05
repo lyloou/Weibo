@@ -62,7 +62,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/id_login_btn"
+            android:id="@+id/id_auth_login_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
@@ -70,7 +70,7 @@
             android:text="登		陆" />
 
         <Button
-            android:id="@+id/id_add_user_btn"
+            android:id="@+id/id_auth_add_user_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

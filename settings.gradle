@@ -1,1 +1,1 @@
-include ':app', ':demo', ':stickyscrollviewitems'
+include ':stickyscrollviewitems', ':app', ':demo'
