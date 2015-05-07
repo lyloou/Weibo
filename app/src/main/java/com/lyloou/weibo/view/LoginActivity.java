@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.exception.WeiboException;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class LoginActivity extends Activity implements IWeiboActivity, OnClickListener {
 	private AuthInfo mAuthInfo;
@@ -40,6 +42,7 @@ public class LoginActivity extends Activity implements IWeiboActivity, OnClickLi
 		Button loginBtn = (Button) findViewById(R.id.id_auth_login_btn);
 		Button addUserBtn = (Button) findViewById(R.id.id_auth_add_user_btn);
 
+		// 授权信息初始化
 		mAuthInfo = new AuthInfo(this, Constants.APP_KEY, Constants.REDIRECT_URL, Constants.SCOPE);
 		mSsoHandler = new SsoHandler(LoginActivity.this, mAuthInfo);
 
@@ -62,7 +65,7 @@ public class LoginActivity extends Activity implements IWeiboActivity, OnClickLi
 	public void onClick(View v) {
 		switch (v.getId()){
 			case R.id.id_auth_add_user_btn:
-				mSsoHandler.authorizeWeb(new AuthListener());
+				mSsoHandler.authorizeWeb(new AuthListener()); //通过网页授权
 				break;
 			case R.id.id_auth_login_btn:
 				break;
@@ -73,6 +76,12 @@ public class LoginActivity extends Activity implements IWeiboActivity, OnClickLi
 
 		@Override
 		public void onComplete(Bundle values) {
+
+//			String accessToken = values.getString("access_token");
+//			String expires_in = values.getString("expires_in");
+//
+//			Log.d(TAG,accessToken+"---"+expires_in);
+
 			// 从 Bundle 中解析 Token
 			mAccessToken = Oauth2AccessToken.parseAccessToken(values);
 			if (mAccessToken.isSessionValid()) {
@@ -110,7 +119,7 @@ public class LoginActivity extends Activity implements IWeiboActivity, OnClickLi
 		}
 
 		private void updateTokenView(boolean hasExisted) {
-			String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(
+			String date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.CHINA).format(
 					new java.util.Date(mAccessToken.getExpiresTime()));
 			String format = "Token：%1$s \n有效期：%2$s";
 			mTokenText.setText(String.format(format, mAccessToken.getToken(), date));
