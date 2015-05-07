@@ -7,6 +7,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyloou.weibo.R;
+import com.lyloou.weibo.app.LogUtil;
 
 public class MainActivity extends Activity implements OnClickListener {
     private LinearLayout mTabBtnHome;
@@ -34,7 +36,7 @@ public class MainActivity extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d(LogUtil.TAG, "授权成功");
 		/* 取消显示title栏目, 稍后自定义 */
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity);
