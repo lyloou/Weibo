@@ -2,14 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/home_border"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/id_home_loadtext_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="正在加载..."
+        android:textSize="18sp"
+        android:visibility="visible" />
 
     <ListView
         android:id="@+id/id_home_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:divider="#00000000"
+        android:dividerHeight="18dp"
+        android:listSelector="@android:color/transparent"
+        android:visibility="gone">
 
     </ListView>
 </LinearLayout>

@@ -21,6 +21,6 @@ public class SettingFragment extends BaseFragment {
 	@Override
 	public String refresh(String str) {
 
-		return "客户服务";
+		return "设置";
 	}
 }

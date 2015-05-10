@@ -22,6 +22,6 @@ public class MessageFragment extends BaseFragment {
 	@Override
 	public String refresh(String str) {
 
-		return "资金记录";
+		return "消息";
 	}
 }

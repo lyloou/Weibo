@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyloou.weibo.R;
-import com.lyloou.weibo.app.LogUtil;
+import com.lyloou.weibo.app.LU;
 
 public class MainActivity extends Activity implements OnClickListener {
     private LinearLayout mTabBtnHome;
@@ -36,7 +36,7 @@ public class MainActivity extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(LogUtil.TAG, "授权成功");
+        Log.d(LU.TAG, "授权成功");
 		/* 取消显示title栏目, 稍后自定义 */
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity);

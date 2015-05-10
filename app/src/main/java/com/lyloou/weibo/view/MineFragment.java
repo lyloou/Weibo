@@ -22,6 +22,6 @@ public class MineFragment extends BaseFragment{
     @Override
     public String refresh(String str) {
 
-        return "交易记录";
+        return "我的";
     }
 }

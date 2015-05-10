@@ -47,8 +47,8 @@ public class MyWeiboAdapter extends BaseAdapter {
         if(convertView == null){
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.home_item,null);
-            holder.textUser = (TextView) convertView.findViewById(R.id.id_home_item_title_tv);
-            holder.textWeibo = (TextView) convertView.findViewById(R.id.id_home_item_content_tv);
+            holder.textUser = (TextView) convertView.findViewById(R.id.id_home_item_user_name_tv);
+            holder.textWeibo = (TextView) convertView.findViewById(R.id.id_home_item_content_text_tv);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
