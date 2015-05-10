@@ -42,9 +42,18 @@ public class LoginActivity extends Activity implements IWeiboActivity, OnClickLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+
+		// 获取本地accessToken,如果有的话.
+		Oauth2AccessToken accessToken = AccessTokenKeeper.readAccessToken(this);
+		if(!TextUtils.isEmpty(accessToken.getToken())){
+			MyApplication.accessToken = accessToken;
+			Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+			startActivity(intent);
+			return ;
+		}
+
 		Button loginBtn = (Button) findViewById(R.id.id_auth_login_btn);
 		Button addUserBtn = (Button) findViewById(R.id.id_auth_add_user_btn);
-
 		// 授权信息初始化
 		mAuthInfo = new AuthInfo(this, Constants.APP_KEY, Constants.REDIRECT_URL, Constants.SCOPE);
 		mSsoHandler = new SsoHandler(LoginActivity.this, mAuthInfo);
@@ -53,6 +62,9 @@ public class LoginActivity extends Activity implements IWeiboActivity, OnClickLi
 
 		loginBtn.setOnClickListener(this);
 		addUserBtn.setOnClickListener(this);
+
+
+
 
 	}
 
@@ -90,7 +102,7 @@ public class LoginActivity extends Activity implements IWeiboActivity, OnClickLi
 			mAccessToken = Oauth2AccessToken.parseAccessToken(values);
 			if (mAccessToken.isSessionValid()) {
 				// 显示 Token
-				updateTokenView(false);
+//				updateTokenView(false);
 
 				// 保存 Token 到 SharedPreferences
 				AccessTokenKeeper.writeAccessToken(LoginActivity.this, mAccessToken);

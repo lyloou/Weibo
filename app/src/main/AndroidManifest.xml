@@ -24,24 +24,6 @@
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.MainActivity" />
 
-        <service android:name=".control.MainService" />
-
-        <activity android:name=".test.StructureActivity">
-
-        </activity>
-        <activity android:name=".test.Handler_Activity">
-
-        </activity>
-        <activity android:name=".test.Service_Activity">
-
-        </activity>
-
-        <activity android:name=".view.AuthActivity">
-
-        </activity>
-
-
-        <service android:name=".test.MyService"/>
 
         <activity
             android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
