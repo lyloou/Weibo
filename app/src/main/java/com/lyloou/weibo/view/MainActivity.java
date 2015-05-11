@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyloou.weibo.R;
-import com.lyloou.weibo.app.LU;
+import com.lyloou.weibo.util.LU;
 
 public class MainActivity extends Activity implements OnClickListener {
     private LinearLayout mTabBtnHome;

@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.lyloou.weibo.R;
 import com.lyloou.weibo.adapter.MyWeiboAdapter;
 import com.lyloou.weibo.app.Constants;
-import com.lyloou.weibo.app.LU;
+import com.lyloou.weibo.util.LU;
 import com.lyloou.weibo.app.MyApplication;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
@@ -30,9 +30,6 @@ public class HomeFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         Log.d(LU.TAG, "1-onCreateView");
         View view = inflater.inflate(R.layout.home, null);
-
-//		TextView textView = (TextView) view.findViewById(R.id.id_txt_content_tv);
-//		textView.setText(refresh(null));
 
         listView = (ListView) view.findViewById(R.id.id_home_lv);
         listView.setItemsCanFocus(false);

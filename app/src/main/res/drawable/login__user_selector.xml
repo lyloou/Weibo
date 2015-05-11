@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <item android:drawable="@mipmap/user_selecte_p" android:state_pressed="true" />
     <!--按下时效果-->
-    <item android:drawable="@mipmap/user_selecte_n" android:state_pressed="false" />
+    <item android:drawable="@mipmap/user_selecte_p" android:state_pressed="true" />
     <!--默认效果-->
+    <item android:drawable="@mipmap/user_selecte_n" android:state_pressed="false" />
 
 
 </selector>

@@ -5,6 +5,10 @@
     android:background="@drawable/home_border"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/id_home_top_include"
+        layout="@layout/home_top"/>
+
     <TextView
         android:id="@+id/id_home_loadtext_tv"
         android:layout_width="match_parent"
@@ -20,8 +24,7 @@
         android:layout_height="match_parent"
         android:divider="#00000000"
         android:dividerHeight="18dp"
-        android:listSelector="@android:color/transparent"
         android:visibility="gone">
-
+<!-- android:listSelector="@android:color/transparent" -->
     </ListView>
 </LinearLayout>

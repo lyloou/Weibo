@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item type="drawable" name="wb_item_list_bg">#ffffff</item>
-    <item type="drawable" name="wb_item_list_bg2">#ffe9e9e9</item>
+    <item type="drawable" name="wb_item_list_bg">#ffffffff</item>
+    <item type="drawable" name="wb_item_list_bg2">#fff0f0f0</item>
+    <item type="drawable" name="wb_item_tool_pressed_bg">#ffeaeaea</item>
 </resources>

@@ -2,21 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical"
+    android:background="@drawable/wb_item_bg"
     android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical"
     android:paddingTop="10dp">
 
     <!-- 微博头:用户名,用户图片,微博发表时间,微博来源 -->
     <LinearLayout
-        android:background="@drawable/wb_item_bg"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:orientation="horizontal">
 
-        <ImageButton
+        <ImageView
+            android:id="@+id/id_home_item_user_head_iv"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@mipmap/login_user_picture" />
@@ -35,8 +36,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:clickable="true"
                 android:text="搞笑补习班"
-                android:textSize="18sp" />
+                android:textColor="#ffdc7448"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,6 +49,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/id_home_item_weibo_time_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="昨天21:06"
@@ -53,11 +57,12 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/id_home_item_weibo_source_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="来自 weibo.com"
+                    android:text="来自:微博 weibo.com"
                     android:textColor="#ff959595"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -70,8 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/wb_item_bg"
+        android:layout_marginTop="6dp"
         android:orientation="vertical">
 
 
@@ -131,61 +135,79 @@
 
     <!-- 微博工具栏 -->
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="4dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/home_weibo_tool_border"
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/id_home_item_weibo_forwarding_count_llyt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center">
+            android:background="@drawable/wb_item_bg"
+            android:gravity="center"
+            android:padding="4dp">
+
             <TextView
+                android:id="@+id/id_home_item_weibo_forwarding_count_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
                 android:drawableLeft="@mipmap/weibo_detail_icon_retweet"
+
+                android:drawablePadding="10dp"
                 android:text="转发"
                 android:textSize="14sp" />
         </LinearLayout>
 
         <View
             android:layout_width="0.1dp"
-            android:background="#aeaeae"
+            android:layout_height="15dp"
             android:layout_gravity="center"
-            android:layout_height="15dp"/>
+            android:background="#aeaeae" />
 
         <LinearLayout
+            android:id="@+id/id_home_item_weibo_forwarding_comment_count_llyt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center">
+            android:background="@drawable/wb_item_bg"
+            android:gravity="center"
+            android:padding="4dp">
+
             <TextView
+                android:id="@+id/id_home_item_weibo_forwarding_comment_count_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
                 android:drawableLeft="@mipmap/weibo_detail_icon_comment"
+                android:drawablePadding="10dp"
                 android:text="评论"
                 android:textSize="14sp" />
         </LinearLayout>
+
         <View
             android:layout_width="0.1dp"
-            android:background="#aeaeae"
+            android:layout_height="15dp"
             android:layout_gravity="center"
-            android:layout_height="15dp"/>
+            android:background="#aeaeae" />
+
         <LinearLayout
+            android:id="@+id/id_home_item_weibo_prise_count_llyt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center">
+            android:background="@drawable/wb_item_bg"
+            android:gravity="center"
+            android:padding="4dp">
+
             <TextView
+                android:id="@+id/id_home_item_weibo_prise_count_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawablePadding="10dp"
                 android:drawableLeft="@mipmap/weibo_detail_icon_like"
+                android:drawablePadding="10dp"
+
                 android:text="赞"
                 android:textSize="14sp" />
         </LinearLayout>
