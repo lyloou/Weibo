@@ -1,14 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="26dp"
-    android:layout_marginRight="26dp">
+    android:background="@mipmap/login_bg">
 
     <LinearLayout
-        android:id="@+id/id_login_spinner_ll"
+        android:id="@+id/id_login_spinner_llyt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
         android:background="@drawable/login_pick_user_spinner_border"
         android:gravity="center"
         android:orientation="horizontal">
@@ -16,12 +17,12 @@
         <TextView
             android:id="@+id/id_login_user_name_tv"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="6dp"
-            android:text="aLouAll"
             android:gravity="center"
-            android:textSize="16sp"
-            android:layout_height="match_parent" />
+            android:padding="10dp"
+            android:text="爍臻子"
+            android:textSize="22sp" />
         <!--
         <ImageButton
             android:layout_width="wrap_content"
@@ -32,10 +33,13 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/id_welcome_user_head_llyt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/id_login_spinner_ll"
+        android:layout_above="@id/id_login_spinner_llyt"
         android:layout_marginBottom="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
         android:gravity="center">
 
         <LinearLayout
@@ -46,21 +50,62 @@
 
             <ImageView
                 android:id="@+id/id_login_user_head_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="4dp"
                 android:contentDescription="@string/user_head"
-                android:src="@mipmap/login_user_picture"/>
+                android:src="@mipmap/login_user_picture2" />
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_above="@id/id_welcome_user_head_llyt"
+        android:layout_marginBottom="30dp"
+        android:gravity="center">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/user_head"
+            android:src="@mipmap/welcome_words" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/id_login_spinner_ll"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:gravity="center">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/user_head"
+            android:src="@mipmap/welcome_slogan" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_login_spinner_llyt"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/login_pick_user_spinner_border"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -68,17 +113,24 @@
             android:id="@+id/id_auth_login_btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:text="用户登录" />
+            android:background="@drawable/wb_item_bg"
+            android:text="用户登录"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0.1dp"
+            android:layout_height="match_parent"
+            android:background="#aeaeae" />
 
         <Button
             android:id="@+id/id_auth_add_user_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_weight="1"
-            android:text="添加用户" />
+            android:background="@drawable/wb_item_bg"
+            android:text="添加用户"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <TextView

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/wb_item_bg"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+    android:orientation="vertical"
+    >
+
+    <!-- 微博头:用户名,用户图片,微博发表时间,微博来源 -->
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/id_home_item_detail_user_head_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/login_user_picture" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_home_item_detail_user_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:text="搞笑补习班"
+                android:textColor="#ffdc7448"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/id_home_item_detail_weibo_time_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="昨天21:06"
+                    android:textColor="#ffefaa4e"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/id_home_item_detail_weibo_source_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="来自:微博 weibo.com"
+                    android:textColor="#ff959595"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 微博正文内容 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="6dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/id_home_item_detail_content_text_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="永远不要和傻逼吵架,因为输赢都不是好事.赢了:卧槽你也是吵赢了一个傻逼啊. 输了:卧槽你连个傻逼都吵不赢.[doge](via眼睛长在屁股上)"
+            android:textColor="#6b717b"
+            android:textSize="16sp" />
+
+
+        <ImageView
+            android:id="@+id/id_home_item_detail_content_img_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="1000dp"
+            android:maxWidth="1000dp"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="3dp"
+            android:src="@mipmap/preview_pic_loading"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+    <!-- 微博转发内容 -->
+    <LinearLayout
+        android:id="@+id/id_home_item_detail_forwarding_llyt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/wb_item_bg2"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <!-- 微博正文内容 -->
+        <TextView
+            android:id="@+id/id_home_item_detail_forwarding_text_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="永远不要和傻逼吵架,因为输赢都不是好事.赢了:卧槽你也是吵赢了一个傻逼啊. 输了:卧槽你连个傻逼都吵不赢.[doge](via眼睛长在屁股上)"
+            android:textColor="#6b717b"
+            android:textSize="16sp" />
+
+
+        <ImageView
+            android:id="@+id/id_home_item_detail_forwarding_img_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="1000dp"
+            android:maxWidth="1000dp"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="3dp"
+            android:src="@mipmap/preview_pic_loading"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

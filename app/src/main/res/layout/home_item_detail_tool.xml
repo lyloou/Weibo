@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!-- 微博工具栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@drawable/home_weibo_tool_border"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/id_home_item_detail_weibo_forwarding_count_llyt"
+            android:layout_width="wrap_content"
+            android:clickable="true"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/wb_item_bg"
+            android:gravity="center"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/id_home_item_detail_weibo_forwarding_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/weibo_detail_icon_retweet"
+                android:drawablePadding="10dp"
+                android:text="转发"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0.1dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:background="#aeaeae" />
+
+        <LinearLayout
+            android:id="@+id/id_home_item_detail_weibo_forwarding_comment_count_llyt"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/wb_item_bg"
+            android:gravity="center"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/id_home_item_detail_weibo_forwarding_comment_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/weibo_detail_icon_comment"
+                android:drawablePadding="10dp"
+                android:text="评论"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0.1dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:background="#aeaeae" />
+
+        <LinearLayout
+            android:id="@+id/id_home_item_detail_weibo_prise_count_llyt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/wb_item_bg"
+            android:clickable="true"
+            android:gravity="center"
+            android:padding="4dp">
+
+            <TextView
+                android:id="@+id/id_home_item_detail_weibo_prise_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/weibo_detail_icon_like"
+                android:drawablePadding="10dp"
+                android:text="赞"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

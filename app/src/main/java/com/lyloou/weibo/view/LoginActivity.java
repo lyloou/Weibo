@@ -2,6 +2,7 @@ package com.lyloou.weibo.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -52,21 +53,48 @@ public class LoginActivity extends Activity implements OnClickListener {
         loginBtn.setOnClickListener(this);
         addUserBtn.setOnClickListener(this);
 
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog.setMessage("正在加载......");
+//        progressDialog.setCancelable(false);
+        progressDialog.show();
+
         // 获取本地accessToken,如果有的话.
         accessToken = AccessTokenKeeper.readAccessToken(this);
-        if (!TextUtils.isEmpty(accessToken.getToken())) {
+        if (accessToken!=null && !TextUtils.isEmpty(accessToken.getToken())) {
             UsersAPI usersAPI = new UsersAPI(this, Constants.APP_KEY, accessToken);
             usersAPI.show(Long.parseLong(accessToken.getUid()), new RequestListener() {
                 @Override
                 public void onComplete(String response) {
                     Log.d(LU.TAG, "===============" + response);
                     user = User.parse(response);
-                    String userName = user.name;
-                    //更换用户名称
-                    userText.setText(userName);
-                    final String userHeadUrl = user.avatar_large;
-                    //根据用户图像url来获取用户图像drawable,新启动一个线程;
-                    CommonUtil.loadImageWithImgURLAndImageView(user.avatar_large,userHead);
+                    String userName = null;
+                    if(user!=null) {
+                        userName = user.name;
+                        //更换用户名称
+                        userText.setText(userName);
+                        //根据用户图像url来获取用户图像drawable,新启动一个线程;
+                        CommonUtil.loadImageWithImgURLAndImageView(user.avatar_large, userHead);
+                    }
+
+                    // 弹出是否登陆
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                    builder.setMessage("【" + userName + "】已登陆,是否继续使用此账号登陆?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    MyApplication.accessToken = accessToken;
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    progressDialog.dismiss();
                 }
 
                 @Override
@@ -75,32 +103,30 @@ public class LoginActivity extends Activity implements OnClickListener {
                 }
             });
 
-            String userName = accessToken.getUid();
+//            String userName = accessToken.getUid();
 
-            // 弹出是否登陆
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("「"+userName + "」已登陆,是否继续使用此账号登陆?")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            MyApplication.accessToken = accessToken;
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
+//            // 弹出是否登陆
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setMessage("「"+userName + "」已登陆,是否继续使用此账号登陆?")
+//                    .setCancelable(false)
+//                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            MyApplication.accessToken = accessToken;
+//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                            startActivity(intent);
+//                        }
+//                    })
+//                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            dialog.cancel();
+//                        }
+//                    });
+//            AlertDialog alert = builder.create();
+//            alert.show();
         }
 
 
     }
-
-
 
 
     public void refresh(Object... obj) {

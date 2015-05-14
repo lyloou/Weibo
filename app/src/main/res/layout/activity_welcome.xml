@@ -3,12 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/id_welcome_enter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:background="@drawable/welcome_enter_selector"
+        android:text="【点我进入】"
+        android:textColor="#777777"
+        android:textSize="22sp" />
     <ImageView
-        android:id="@+id/id_welcome"
+        android:id="@+id/id_welcome_iv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ff19411d"
-        android:scaleType="fitXY" />
-    <!--android:src="@mipmap/welcome" -->
+        android:src="@mipmap/welcome_text"
+        android:layout_above="@id/id_welcome_enter"
+        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/welcome_slogan" />
 </RelativeLayout>
 

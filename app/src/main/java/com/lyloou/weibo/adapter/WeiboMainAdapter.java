@@ -1,12 +1,8 @@
 package com.lyloou.weibo.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.os.Handler;
-import android.os.Message;
+import android.content.Intent;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,36 +10,39 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lyloou.weibo.R;
 import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
-import com.lyloou.weibo.util.NetUtil;
+import com.lyloou.weibo.view.WeiboDetailActivity;
+import com.lyloou.weibo.view.WeiboDetailFragment;
 import com.sina.weibo.sdk.openapi.models.Status;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by lilou on 2015/5/8.
  */
-public class MyWeiboAdapter extends BaseAdapter {
+public class WeiboMainAdapter extends BaseAdapter {
 
-    private List<Status> statuses;
+    private List<Status> mStatuses;
     private LayoutInflater mInflater;
+    private Context mContext;
+    private Status mStatus;
+    private Status mRetweedStatus;
 
 
-    public MyWeiboAdapter(Context context, List<Status> status) {
-        this.statuses = status;
+    public WeiboMainAdapter(Context context, List<Status> statuses) {
+        this.mStatuses = statuses;
+        mContext = context;
         mInflater = LayoutInflater.from(context);
     }
 
 
     @Override
     public int getCount() {
-        return statuses == null ? 0 : statuses.size();
+        return mStatuses == null ? 0 : mStatuses.size();
     }
 
     @Override
@@ -53,16 +52,37 @@ public class MyWeiboAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return (Long.parseLong(statuses.get(position).id));
+        return (Long.parseLong(mStatuses.get(position).id));
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ViewHolder holder;
-        Status s = statuses.get(position);
-        if (convertView == null) {
+        //异步问题导致的图片和部分文字错位,这里借用convertView=null强制重新加载布局的方式. 待优化.
+        ViewHolder holder;
+        mStatus = mStatuses.get(position);
+
+        //获得微博图片地址
+        String weiboPicURL = mStatus.thumbnail_pic;
+        //判断图片地址是否存在
+        boolean isExistedWeiboPic = !CommonUtil.isEmpty(weiboPicURL);
+
+        //判断是否有转发
+
+        String weiboRetweetedPicURL = null;
+        mRetweedStatus = mStatus.retweeted_status;
+        boolean isExistedRetweeted = (mRetweedStatus != null);
+        boolean isExistedWeiboRetweetedPic = false;
+        if (isExistedRetweeted) {
+            //转发图片地址
+            weiboRetweetedPicURL = mRetweedStatus.thumbnail_pic;
+            //是否存在转发图片
+            isExistedWeiboRetweetedPic = (!CommonUtil.isEmpty(weiboRetweetedPicURL));
+        }
+
+
+        if (convertView == null || convertView.getTag() == null) {
             holder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.home_item, null);
+            convertView = mInflater.inflate(R.layout.home_item, parent, false);
 
             //用户姓名
             holder.weiboUserName = (TextView) convertView.findViewById(R.id.id_home_item_user_name_tv);
@@ -82,21 +102,18 @@ public class MyWeiboAdapter extends BaseAdapter {
             holder.weiboSource = (TextView) convertView.findViewById(R.id.id_home_item_weibo_source_tv);
 
             //微博图片
-            if (!CommonUtil.isEmpty(s.thumbnail_pic)) {
+            if (isExistedWeiboPic) {
                 holder.weiboPic = (ImageView) convertView.findViewById(R.id.id_home_item_content_img_iv);
-                holder.weiboPic.setVisibility(View.VISIBLE);
             }
 
             //微博转发
             //微博用户姓名+微博内容+微博图片
-            if (s.retweeted_status != null) {
+            if (isExistedRetweeted) {
                 holder.weiboForwarding = (LinearLayout) convertView.findViewById(R.id.id_home_item_forwarding_llyt);
-                holder.weiboForwarding.setVisibility(View.VISIBLE);
                 holder.weiboForwardingContent = (TextView) convertView.findViewById(R.id.id_home_item_forwarding_text_tv);
-//                holder.weiboForwardingContent.setText(s.retweeted_status.text);
-                if (!CommonUtil.isEmpty(s.retweeted_status.thumbnail_pic)) {
+                if (isExistedWeiboRetweetedPic) {
                     holder.weiboForwardingPic = (ImageView) convertView.findViewById(R.id.id_home_item_forwarding_img_iv);
-                    holder.weiboForwardingPic.setVisibility(View.VISIBLE);
+
                 }
             }
 
@@ -104,6 +121,7 @@ public class MyWeiboAdapter extends BaseAdapter {
             //微博转发数
             holder.weiboForwardingCount = (TextView) convertView.findViewById(R.id.id_home_item_weibo_forwarding_count_tv);
             holder.weiboForwardingCountllyt = (LinearLayout) convertView.findViewById(R.id.id_home_item_weibo_forwarding_count_llyt);
+
             //微博评论数
             holder.weiboCommentsCount = (TextView) convertView.findViewById(R.id.id_home_item_weibo_forwarding_comment_count_tv);
             holder.weiboCommentsCountllyt = (LinearLayout) convertView.findViewById(R.id.id_home_item_weibo_forwarding_comment_count_llyt);
@@ -111,7 +129,9 @@ public class MyWeiboAdapter extends BaseAdapter {
             //微博赞数
             holder.weiboPraiseCount = (TextView) convertView.findViewById(R.id.id_home_item_weibo_prise_count_tv);
             holder.weiboPraiseCountllyt = (LinearLayout) convertView.findViewById(R.id.id_home_item_weibo_prise_count_llyt);
+
             convertView.setTag(holder);
+
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
@@ -119,7 +139,7 @@ public class MyWeiboAdapter extends BaseAdapter {
         ////设值
 
         //用户姓名
-        holder.weiboUserName.setText(s.user.name);
+        holder.weiboUserName.setText(mStatus.user.name);
         holder.weiboUserName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +148,7 @@ public class MyWeiboAdapter extends BaseAdapter {
         });
 
         //用户图像
-        CommonUtil.loadImageWithImgURLAndImageView(s.user.profile_image_url, holder.weiboUserPic);
+        CommonUtil.loadImageWithImgURLAndImageView(mStatus.user.profile_image_url, holder.weiboUserPic);
         holder.weiboUserPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -138,46 +158,58 @@ public class MyWeiboAdapter extends BaseAdapter {
 
 
         //微博内容
-        holder.weiboContent.setText(s.text);
+        holder.weiboContent.setText(Html.fromHtml(CommonUtil.atBlue(mStatus.text)));
 
         //用户认证
 
         //微博发表时间
-        Date oldDate = CommonUtil.strToDate(s.created_at);
+        Date oldDate = CommonUtil.strToDate(mStatus.created_at);
         Date newDate = new Date(System.currentTimeMillis());
         String dateString = CommonUtil.getTimeStr(oldDate, newDate);
         holder.weiboTime.setText(dateString);
 
         //微博来源
-        holder.weiboSource.setText(Html.fromHtml("<font color=\"#9b9b9b\">" + "来源:" + s.source + "</font>"));
+        holder.weiboSource.setText(Html.fromHtml("<font color=\"#9b9b9b\">" + "来源:" + mStatus.source + "</font>"));
 
         //微博图片
 
-        if (!CommonUtil.isEmpty(s.thumbnail_pic) && holder.weiboPic != null) {
-            CommonUtil.loadImageWithImgURLAndImageView(s.thumbnail_pic, holder.weiboPic);
+        if (isExistedWeiboPic && holder.weiboPic!=null) {
+            //有图片的话现将默认图片放过去
+            holder.weiboPic.setVisibility(View.VISIBLE);
+            CommonUtil.loadImageWithImgURLAndImageView(weiboPicURL, holder.weiboPic);
         }
 
         //微博是否有转发
         //微博用户姓名+微博内容+微博图片
-        if (s.retweeted_status != null && holder.weiboForwardingContent != null) {
+        if (isExistedRetweeted && holder.weiboForwarding!=null) {
+            holder.weiboForwarding.setVisibility(View.VISIBLE);
             //微博转发内容
-            holder.weiboForwardingContent.setText("@" + s.retweeted_status.user.name + ": " + s.retweeted_status.text);
+            String strForwarding = "@" + mRetweedStatus.user.name + ": " + mRetweedStatus.text;
+            holder.weiboForwardingContent.setText(Html.fromHtml(CommonUtil.atBlue(strForwarding)));
 
             //微博转发图像
-            if (!CommonUtil.isEmpty(s.retweeted_status.thumbnail_pic) && holder.weiboForwardingPic != null) {
-                CommonUtil.loadImageWithImgURLAndImageView(s.retweeted_status.thumbnail_pic, holder.weiboForwardingPic);
+            if (isExistedWeiboRetweetedPic) {
+                holder.weiboForwardingPic.setVisibility(View.VISIBLE);
+                CommonUtil.loadImageWithImgURLAndImageView(weiboRetweetedPicURL, holder.weiboForwardingPic);
             }
+
+            //设置转发区域点击事件--跳转到转发微博的详细界面
             holder.weiboForwarding.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     LU.log("我是转发区域");
+
+                    Intent intent = new Intent(mContext, WeiboDetailActivity.class);
+                    intent.putExtra(WeiboDetailFragment.ARGUMENT, mStatus.id);
+                    WeiboDetailFragment.statusStatic = mRetweedStatus;
+                    mContext.startActivity(intent);
                 }
             });
         }
 
         //微博转发数
-        if (s.reposts_count > 0) {
-            holder.weiboForwardingCount.setText("" + s.reposts_count);
+        if (mStatus.reposts_count > 0) {
+            holder.weiboForwardingCount.setText("" + mStatus.reposts_count);
         }
         holder.weiboForwardingCountllyt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,8 +219,8 @@ public class MyWeiboAdapter extends BaseAdapter {
         });
 
         //微博评论数
-        if (s.comments_count > 0) {
-            holder.weiboCommentsCount.setText("" + s.comments_count);
+        if (mStatus.comments_count > 0) {
+            holder.weiboCommentsCount.setText("" + mStatus.comments_count);
         }
         holder.weiboCommentsCountllyt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,8 +230,8 @@ public class MyWeiboAdapter extends BaseAdapter {
         });
 
         //微博赞数
-        if (s.attitudes_count > 0) {
-            holder.weiboPraiseCount.setText("" + s.attitudes_count);
+        if (mStatus.attitudes_count > 0) {
+            holder.weiboPraiseCount.setText("" + mStatus.attitudes_count);
         }
         holder.weiboPraiseCountllyt.setOnClickListener(new View.OnClickListener() {
             @Override
