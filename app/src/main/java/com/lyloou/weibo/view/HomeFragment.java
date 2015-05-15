@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.lyloou.weibo.R;
 import com.lyloou.weibo.adapter.WeiboMainAdapter;
 import com.lyloou.weibo.app.Constants;
+import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
 import com.lyloou.weibo.app.MyApplication;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
@@ -40,6 +41,7 @@ public class HomeFragment extends BaseFragment {
     private TextView userNameText;
     private User user;
     private ImageView refreshImg;
+    private ImageView updateWeibo;
     private StatusesAPI mStatusesAPI;
     private Button loadMoreBtn;
     private int indexOld;
@@ -64,6 +66,10 @@ public class HomeFragment extends BaseFragment {
         refreshImg = (ImageView) view.findViewById(R.id.id_home_top_refresh_iv);
         refreshImg.setClickable(true);
 
+        //写微博
+        updateWeibo = (ImageView) view.findViewById(R.id.id_home_top_compose_iv);
+        updateWeibo.setClickable(true);
+
         // 在Listview下面添加「加载更多」
         View loadMoreView = getActivity().getLayoutInflater().inflate(R.layout.home_load_more, null);
         listView.addFooterView(loadMoreView);
@@ -80,26 +86,8 @@ public class HomeFragment extends BaseFragment {
         loadNewWeibo();
 
         // 加载用户姓名
-        Oauth2AccessToken accessToken = MyApplication.accessToken;
-        if (!TextUtils.isEmpty(accessToken.getToken())) {
-            UsersAPI usersAPI = new UsersAPI(getActivity(), Constants.APP_KEY, accessToken);
-            usersAPI.show(Long.parseLong(accessToken.getUid()), new RequestListener() {
-                @Override
-                public void onComplete(String response) {
-                    LU.log("===============" + response);
-                    user = User.parse(response);
-                    if (user != null) {
-                        //更换用户名称
-                        String userName = user.name;
-                        userNameText.setText(userName);
-                    }
-                }
+        CommonUtil.setUserNameInTextView(getActivity(), MyApplication.accessToken, userNameText);
 
-                @Override
-                public void onWeiboException(WeiboException e) {
-                }
-            });
-        }
 
         //刷新列表
         refreshImg.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +99,14 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
+        //写微博
+        updateWeibo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WeiboUpdateActivity.class);
+                startActivityForResult(intent,0);
+            }
+        });
         return view;
     }
 
@@ -120,8 +116,16 @@ public class HomeFragment extends BaseFragment {
         return "主页";
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0){
+            loadNewWeibo();
+        }
+    }
+
     //重新加载
-    private void loadNewWeibo() {
+    private  void  loadNewWeibo() {
         MAX_ID = 15;
         mStatusesAPI = new StatusesAPI(getActivity(), Constants.APP_KEY, MyApplication.accessToken);
         mStatusesAPI.friendsTimeline(0L, 0L, MAX_ID, 1, false, 0, false, new WeiboRequestListener());

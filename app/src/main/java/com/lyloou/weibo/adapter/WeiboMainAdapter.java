@@ -79,7 +79,8 @@ public class WeiboMainAdapter extends BaseAdapter {
             isExistedWeiboRetweetedPic = (!CommonUtil.isEmpty(weiboRetweetedPicURL));
         }
 
-
+        //TODO 怎样才能解决convert不这样设置, 微博不乱套, 图片不乱套呢?????, 这个问题先搁着, 回头要解决.
+        convertView = null;
         if (convertView == null || convertView.getTag() == null) {
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.home_item, parent, false);
@@ -173,7 +174,7 @@ public class WeiboMainAdapter extends BaseAdapter {
 
         //微博图片
 
-        if (isExistedWeiboPic && holder.weiboPic!=null) {
+        if (isExistedWeiboPic && holder.weiboPic != null) {
             //有图片的话现将默认图片放过去
             holder.weiboPic.setVisibility(View.VISIBLE);
             CommonUtil.loadImageWithImgURLAndImageView(weiboPicURL, holder.weiboPic);
@@ -181,7 +182,7 @@ public class WeiboMainAdapter extends BaseAdapter {
 
         //微博是否有转发
         //微博用户姓名+微博内容+微博图片
-        if (isExistedRetweeted && holder.weiboForwarding!=null) {
+        if (isExistedRetweeted ) {
             holder.weiboForwarding.setVisibility(View.VISIBLE);
             //微博转发内容
             String strForwarding = "@" + mRetweedStatus.user.name + ": " + mRetweedStatus.text;
@@ -192,19 +193,20 @@ public class WeiboMainAdapter extends BaseAdapter {
                 holder.weiboForwardingPic.setVisibility(View.VISIBLE);
                 CommonUtil.loadImageWithImgURLAndImageView(weiboRetweetedPicURL, holder.weiboForwardingPic);
             }
-
+/*
+            //TODO 又一个问题, 如何才能解决有的转发点击不了呢
             //设置转发区域点击事件--跳转到转发微博的详细界面
             holder.weiboForwarding.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     LU.log("我是转发区域");
-
                     Intent intent = new Intent(mContext, WeiboDetailActivity.class);
                     intent.putExtra(WeiboDetailFragment.ARGUMENT, mStatus.id);
                     WeiboDetailFragment.statusStatic = mRetweedStatus;
                     mContext.startActivity(intent);
                 }
             });
+            */
         }
 
         //微博转发数

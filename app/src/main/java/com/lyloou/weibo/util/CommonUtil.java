@@ -1,5 +1,6 @@
 package com.lyloou.weibo.util;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
@@ -9,6 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.lyloou.weibo.app.Constants;
+import com.lyloou.weibo.app.MyApplication;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.openapi.UsersAPI;
+import com.sina.weibo.sdk.openapi.models.User;
 
 import java.text.ParseException;
 import java.text.ParsePosition;
@@ -242,5 +252,40 @@ public class CommonUtil {
         // listView.getDividerHeight()获取子项间分隔符占用的高度
         // params.height最后得到整个ListView完整显示需要的高度
         listView.setLayoutParams(params);
+    }
+
+    /**
+     * 根据三个参数设置用户名到textview上
+     * @param context
+     * @param accessToken
+     * @param userNameText
+     */
+    public static void setUserNameInTextView(Context context,Oauth2AccessToken accessToken, final TextView userNameText){
+        setUserNameInTextView(context,accessToken,Long.parseLong(accessToken.getUid()),userNameText);
+    }
+
+    /**
+     * 根据四个参数来设置用户名到textview上
+     * @param context
+     * @param accessToken
+     * @param uId
+     * @param userNameText
+     */
+    public static void setUserNameInTextView(Context context,Oauth2AccessToken accessToken, Long uId,final TextView userNameText){
+        UsersAPI usersAPI= new UsersAPI(context, Constants.APP_KEY, accessToken);
+        usersAPI.show(uId, new RequestListener() {
+            @Override
+            public void onComplete(String s) {
+                LU.log("查找用户名成功.");
+                User user = User.parse(s);
+                if(user!=null)
+                    userNameText.setText(user.name);
+            }
+
+            @Override
+            public void onWeiboException(WeiboException e) {
+
+            }
+        });
     }
 }
