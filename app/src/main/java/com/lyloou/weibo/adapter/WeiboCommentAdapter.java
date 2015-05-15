@@ -107,9 +107,8 @@ public class WeiboCommentAdapter extends BaseAdapter {
             weiboSource.setText(Html.fromHtml("<font color=\"#9b9b9b\">" + "来源:" + mStatus.source + "</font>"));
 
             //微博图片
-            ImageView weiboPic = null;
             if (!CommonUtil.isEmpty(mStatus.bmiddle_pic)) {
-                weiboPic = (ImageView) convertView.findViewById(R.id.id_home_item_detail_content_img_iv);
+                ImageView weiboPic = (ImageView) convertView.findViewById(R.id.id_home_item_detail_content_img_iv);
                 weiboPic.setVisibility(View.VISIBLE);
                 CommonUtil.loadImageWithImgURLAndImageView(mStatus.bmiddle_pic, weiboPic);
             }
@@ -155,12 +154,12 @@ public class WeiboCommentAdapter extends BaseAdapter {
             return convertView;
         }
 
-        //有一个问题啊. convertView是否改为空呢,这样性能会下降很多的
+        //很不错 这个地方的holderView不会出现WeiboMainAdapter中的问题, 高兴..哈哈哈.
         ViewHolder holder;
         Comment comment = commentList.get(position-1);
         if (convertView == null || convertView.getTag() == null) {
             holder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.home_item_detail_comment_item, null);
+            convertView = mInflater.inflate(R.layout.home_item_detail_comment_item, parent,false);
 
             //评论楼层
             holder.floorNum = (TextView) convertView.findViewById(R.id.id_home_item_detail_comment_item_floor_tv);

@@ -200,6 +200,23 @@ public class StatusesAPI extends AbsOpenAPI {
         return requestSync(sAPIList.get(READ_API_FRIENDS_TIMELINE), params, HTTPMETHOD_GET);
     }
 
+
+    //自定义转发接口
+
+    /**
+     *
+     * @param weiBoid 要转发的微博id
+     * @param status 添加的转发文本，必须做URLencode，内容不超过140个汉字，不填则默认为“转发微博”。
+     * @param is_comment 是否在转发的同时发表评论，0：否、1：评论给当前微博、2：评论给原微博、3：都评论，默认为0 。
+     * @param listener 异步请求回调接口
+     */
+    public void repost(long weiBoid,String status, int is_comment, RequestListener listener) {
+        WeiboParameters params = buildReportsParams(weiBoid, status, is_comment);
+        requestAsync(sAPIList.get(WRITE_API_REPOST), params, HTTPMETHOD_POST, listener);
+    }
+
+
+
     /**
      * -----------------------------------------------------------------------
      * 请注意：以下方法匀均同步方法。如果开发者有自己的异步请求机制，请使用该函数。
@@ -282,5 +299,15 @@ public class StatusesAPI extends AbsOpenAPI {
         params.put("trim_user", trim_user ? 1 : 0);
         
         return params;
-    } 
+    }
+
+
+    //自定义
+    private WeiboParameters buildReportsParams(long weiBoid, String status, int is_comment) {
+        WeiboParameters params = new WeiboParameters(mAppKey);
+        params.put("id",weiBoid);
+        params.put("status",status);
+        params.put("is_comment",is_comment);
+        return params;
+    }
 }
