@@ -18,6 +18,8 @@ import com.lyloou.weibo.app.Constants;
 import com.lyloou.weibo.app.MyApplication;
 import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
+import com.lyloou.weibo.view.WeiboCommentActivity;
+import com.lyloou.weibo.view.WeiboCommentFragment;
 import com.lyloou.weibo.view.WeiboDetailActivity;
 import com.lyloou.weibo.view.WeiboDetailFragment;
 import com.sina.weibo.sdk.exception.WeiboException;
@@ -251,7 +253,11 @@ public class WeiboMainAdapter extends BaseAdapter {
             holder.weiboCommentsCountllyt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    LU.log("评论数");
+                    LU.log("评论");
+                    Intent intent = new Intent(mContext, WeiboCommentActivity.class);
+                    intent.putExtra(WeiboCommentFragment.ARGUMENT, status.id);
+                    WeiboCommentFragment.statusStatic = status;
+                    mContext.startActivity(intent);
                 }
             });
 
@@ -262,7 +268,7 @@ public class WeiboMainAdapter extends BaseAdapter {
             holder.weiboPraiseCountllyt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    LU.log("赞数");
+                    LU.log("赞数--暂未实现它的点击事件");
                 }
             });
         }

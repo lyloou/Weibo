@@ -24,9 +24,11 @@ public class MessageFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.message, null);
 
         ListView listView = (ListView) view.findViewById(R.id.id_message_lv);
-        String[] textDatas = {"@我的", "评论", "赞"};
+        String[] textDatas = {"@我的", "评论", "赞","群组聊天","未关注人私信","公告"};
         dataLists = new ArrayList<>();
-        int[] imgDatas = {R.mipmap.message_at, R.mipmap.message_comments, R.mipmap.message_good};
+        int[] imgDatas = {R.mipmap.message_at, R.mipmap.message_comments,
+                R.mipmap.message_good,R.mipmap.message_groupchat,
+                R.mipmap.message_stranger,R.mipmap.message_notice};
         SimpleAdapter adapter = new SimpleAdapter(
                 getActivity(),
                 getDatas(textDatas, imgDatas),

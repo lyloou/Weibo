@@ -3,5 +3,6 @@
     <item type="drawable" name="wb_item_list_bg">#ffffffff</item>
     <item type="drawable" name="wb_item_list_bg2">#fff0f0f0</item>
     <item type="drawable" name="wb_item_list_bg3">#00ffffff</item>
+    <item type="drawable" name="wb_item_list_bg4">#ffffffff</item>
     <item type="drawable" name="wb_item_tool_pressed_bg">#ffeaeaea</item>
 </resources>

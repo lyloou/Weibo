@@ -1,5 +1,6 @@
 package com.lyloou.weibo.view;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lyloou.weibo.R;
 import com.lyloou.weibo.adapter.WeiboCommentAdapter;
@@ -18,6 +20,7 @@ import com.lyloou.weibo.util.LU;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
 import com.sina.weibo.sdk.openapi.CommentsAPI;
+import com.sina.weibo.sdk.openapi.StatusesAPI;
 import com.sina.weibo.sdk.openapi.models.CommentList;
 import com.sina.weibo.sdk.openapi.models.Status;
 
@@ -31,6 +34,7 @@ public class WeiboDetailFragment extends BaseFragment {
     public static Status statusStatic;
     private Status mStatus;
     private TextView commentInit;
+    private StatusesAPI mStatusesAPI;
 
 
     public static WeiboDetailFragment newInstance(String arg) {
@@ -45,6 +49,7 @@ public class WeiboDetailFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
+        mStatusesAPI = new StatusesAPI(getActivity(), Constants.APP_KEY, MyApplication.accessToken);
         if (bundle != null) {
             //本来打算使用微博id来获取status的, 但是发现没有可以使用的接口, 就通过static的方式直接传递过来了.
             String weiboIDStr = bundle.getString(ARGUMENT);
@@ -72,6 +77,23 @@ public class WeiboDetailFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 LU.log("转发数");
+                final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setMessage("转发中......");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                mStatusesAPI.repost(Long.parseLong(mStatus.id), null, 0, new RequestListener() {
+                    @Override
+                    public void onComplete(String s) {
+                        LU.log("转发了一条微博" + s);
+                        Toast.makeText(getActivity(), "转发成功", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onWeiboException(WeiboException e) {
+
+                    }
+                });
             }
         });
 

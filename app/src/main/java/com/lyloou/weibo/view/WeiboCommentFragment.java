@@ -19,13 +19,14 @@ import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.openapi.CommentsAPI;
 import com.sina.weibo.sdk.openapi.StatusesAPI;
 import com.sina.weibo.sdk.openapi.models.Status;
 
 /**
  * Created by lilou on 2015/5/14.
  */
-public class WeiboUpdateFragment extends BaseFragment {
+public class WeiboCommentFragment extends BaseFragment {
     public static final String ARGUMENT = "weibo_id";
     //设置限制字数
     public static final int MAX_TEXT_NUM = 140;
@@ -40,12 +41,12 @@ public class WeiboUpdateFragment extends BaseFragment {
 
 
 
-    public static WeiboUpdateFragment newInstance(String arg) {
+    public static WeiboCommentFragment newInstance(String arg) {
         Bundle bundle = new Bundle();
         bundle.putString(ARGUMENT, arg);
-        WeiboUpdateFragment weiboDetailFragment = new WeiboUpdateFragment();
-        weiboDetailFragment.setArguments(bundle);
-        return weiboDetailFragment;
+        WeiboCommentFragment weiboCommentFragment = new WeiboCommentFragment();
+        weiboCommentFragment.setArguments(bundle);
+        return weiboCommentFragment;
     }
 
     @Override
@@ -60,12 +61,12 @@ public class WeiboUpdateFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.home_update, container, false);
-        cancelTv = (TextView) view.findViewById(R.id.id_home_update_top_cancel_tv);
-        sendTv = (TextView) view.findViewById(R.id.id_home_update_top_send_tv);
-        contentET = (EditText) view.findViewById(R.id.id_home_update_content_et);
-        tipLlyt = (LinearLayout) view.findViewById(R.id.id_home_update_bottom_tip_llyt);
-        tipTv = (TextView) view.findViewById(R.id.id_home_update_bottom_tip_tv);
+        View view = inflater.inflate(R.layout.home_coment, container, false);
+        cancelTv = (TextView) view.findViewById(R.id.id_home_coment_top_cancel_tv);
+        sendTv = (TextView) view.findViewById(R.id.id_home_coment_top_send_tv);
+        contentET = (EditText) view.findViewById(R.id.id_home_coment_content_et);
+        tipLlyt = (LinearLayout) view.findViewById(R.id.id_home_coment_bottom_tip_llyt);
+        tipTv = (TextView) view.findViewById(R.id.id_home_coment_bottom_tip_tv);
         userName = (TextView)view.findViewById(R.id.id_home_top_username_tv);
         tipTv.setText("还可输入" + MAX_TEXT_NUM + "字");
 
@@ -87,14 +88,14 @@ public class WeiboUpdateFragment extends BaseFragment {
         sendTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StatusesAPI mStatusesAPI = new StatusesAPI(getActivity(), Constants.APP_KEY, MyApplication.accessToken);
+                CommentsAPI mCommentsAPI = new CommentsAPI(getActivity(), Constants.APP_KEY, MyApplication.accessToken);
                 String content = contentET.getText().toString();
                 LU.log("我是发送按钮." + content);
-                mStatusesAPI.update(content, "0.0", "0.0", new RequestListener() {
+                mCommentsAPI.create(content, Long.parseLong(statusStatic.id), false, new RequestListener() {
                     @Override
                     public void onComplete(String s) {
                         LU.log("已经发送." + s);
-                        Toast.makeText(getActivity(),"发送成功",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "发送成功", Toast.LENGTH_SHORT).show();
                         getActivity().finish();
                     }
 

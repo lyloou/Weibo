@@ -7,7 +7,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
         android:background="@drawable/home_weibo_tool_border"
         android:orientation="horizontal">
 
@@ -19,7 +18,7 @@
             android:layout_weight="1"
             android:background="@drawable/wb_item_bg"
             android:gravity="center"
-            android:padding="4dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/id_home_item_detail_weibo_forwarding_count_tv"
@@ -45,7 +44,7 @@
             android:layout_weight="1"
             android:background="@drawable/wb_item_bg"
             android:gravity="center"
-            android:padding="4dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/id_home_item_detail_weibo_forwarding_comment_count_tv"
@@ -71,7 +70,7 @@
             android:background="@drawable/wb_item_bg"
             android:clickable="true"
             android:gravity="center"
-            android:padding="4dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/id_home_item_detail_weibo_prise_count_tv"

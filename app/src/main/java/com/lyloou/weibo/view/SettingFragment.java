@@ -12,9 +12,7 @@ public class SettingFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment, null);
-		TextView textView = (TextView) view.findViewById(R.id.id_txt_content_tv);
-		textView.setText(refresh(null));
+		View view = inflater.inflate(R.layout.setting, null);
 		return view;
 	}
 
