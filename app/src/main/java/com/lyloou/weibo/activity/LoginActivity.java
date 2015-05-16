@@ -55,7 +55,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
         if(accessToken == null || TextUtils.isEmpty(accessToken.getToken())){
             // 授权信息初始化
-//            initUserInfo();
+//            initAuthInfo2();
             //不让他自动跳转，需要手动添加。
         }
         if (accessToken != null && !TextUtils.isEmpty(accessToken.getToken())) {
@@ -128,7 +128,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         }
     }
 
-    private void initUserInfo() {
+    private void initAuthInfo2() {
         AuthInfo mAuthInfo = new AuthInfo(this, Constants.APP_KEY, Constants.REDIRECT_URL, Constants.SCOPE);
         SsoHandler mSsoHandler = new SsoHandler(LoginActivity.this, mAuthInfo);
         mSsoHandler.authorizeWeb(new AuthListener()); //通过网页授权
@@ -144,7 +144,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         switch (v.getId()) {
             case R.id.id_auth_add_user_btn:
                 // 授权信息初始化
-                initUserInfo();
+                initAuthInfo2();
                 break;
             case R.id.id_auth_login_btn:
                 //如果用户已经登陆过,则可以使用此按钮
