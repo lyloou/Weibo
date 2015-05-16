@@ -1,4 +1,4 @@
-package com.lyloou.weibo.app;
+package com.lyloou.weibo.constant;
 
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 

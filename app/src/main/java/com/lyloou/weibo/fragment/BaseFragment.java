@@ -1,4 +1,4 @@
-package com.lyloou.weibo.view;
+package com.lyloou.weibo.fragment;
 
 
 import android.app.Fragment;

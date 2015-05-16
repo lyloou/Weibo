@@ -1,10 +1,10 @@
-package com.lyloou.weibo.view;
+package com.lyloou.weibo.activity;
 
 
 import android.app.Fragment;
 
+import com.lyloou.weibo.fragment.WeiboDetailFragment;
 import com.lyloou.weibo.util.FragmentActivityUtil;
-import com.sina.weibo.sdk.openapi.models.Status;
 
 /**
  * Created by lilou on 2015/5/14.

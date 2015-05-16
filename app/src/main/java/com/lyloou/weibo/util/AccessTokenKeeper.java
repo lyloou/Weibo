@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lyloou.weibo.app;
+package com.lyloou.weibo.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

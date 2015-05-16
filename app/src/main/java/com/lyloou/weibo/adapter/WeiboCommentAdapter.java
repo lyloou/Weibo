@@ -14,8 +14,8 @@ import android.widget.TextView;
 import com.lyloou.weibo.R;
 import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
-import com.lyloou.weibo.view.WeiboDetailActivity;
-import com.lyloou.weibo.view.WeiboDetailFragment;
+import com.lyloou.weibo.activity.WeiboDetailActivity;
+import com.lyloou.weibo.fragment.WeiboDetailFragment;
 import com.sina.weibo.sdk.openapi.models.Comment;
 import com.sina.weibo.sdk.openapi.models.Status;
 

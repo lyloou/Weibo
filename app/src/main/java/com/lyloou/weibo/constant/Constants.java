@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.lyloou.weibo.app;
+package com.lyloou.weibo.constant;
 
 /**
  * 该类定义了微博授权时所需要的参数。

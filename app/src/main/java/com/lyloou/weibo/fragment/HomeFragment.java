@@ -1,8 +1,7 @@
-package com.lyloou.weibo.view;
+package com.lyloou.weibo.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +16,15 @@ import android.widget.Toast;
 
 import com.lyloou.weibo.R;
 import com.lyloou.weibo.adapter.WeiboMainAdapter;
-import com.lyloou.weibo.app.Constants;
+import com.lyloou.weibo.constant.Constants;
 import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
-import com.lyloou.weibo.app.MyApplication;
-import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.lyloou.weibo.constant.MyApplication;
+import com.lyloou.weibo.activity.WeiboDetailActivity;
+import com.lyloou.weibo.activity.WeiboUpdateActivity;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
 import com.sina.weibo.sdk.openapi.StatusesAPI;
-import com.sina.weibo.sdk.openapi.UsersAPI;
 import com.sina.weibo.sdk.openapi.models.Status;
 import com.sina.weibo.sdk.openapi.models.StatusList;
 import com.sina.weibo.sdk.openapi.models.User;

@@ -1,4 +1,4 @@
-package com.lyloou.weibo.view;
+package com.lyloou.weibo.activity;
 
 
 import android.app.Activity;
@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyloou.weibo.R;
+import com.lyloou.weibo.fragment.FactoryFragment;
 import com.lyloou.weibo.util.LU;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -62,8 +63,8 @@ public class MainActivity extends Activity implements OnClickListener {
                         Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
-                finish();
-                System.exit(0);
+                this.finish();
+//                System.exit(0);
             }
             return true;
         }

@@ -1,8 +1,9 @@
-package com.lyloou.weibo.view;
+package com.lyloou.weibo.activity;
 
 
 import android.app.Fragment;
 
+import com.lyloou.weibo.fragment.WeiboCommentFragment;
 import com.lyloou.weibo.util.FragmentActivityUtil;
 
 /**

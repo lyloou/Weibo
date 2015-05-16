@@ -1,6 +1,7 @@
-package com.lyloou.weibo.view;
+package com.lyloou.weibo.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +14,11 @@ import android.widget.Toast;
 
 import com.lyloou.weibo.R;
 import com.lyloou.weibo.adapter.WeiboCommentAdapter;
-import com.lyloou.weibo.app.Constants;
-import com.lyloou.weibo.app.MyApplication;
+import com.lyloou.weibo.constant.Constants;
+import com.lyloou.weibo.constant.MyApplication;
 import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
+import com.lyloou.weibo.activity.WeiboCommentActivity;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
 import com.sina.weibo.sdk.openapi.CommentsAPI;
@@ -104,6 +106,10 @@ public class WeiboDetailFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 LU.log("评论数");
+                Intent intent = new Intent(getActivity(), WeiboCommentActivity.class);
+                intent.putExtra(WeiboCommentFragment.ARGUMENT, mStatus.id);
+                WeiboCommentFragment.statusStatic = mStatus;
+                getActivity().startActivity(intent);
             }
         });
 

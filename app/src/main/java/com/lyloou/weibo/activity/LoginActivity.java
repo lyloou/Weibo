@@ -1,14 +1,11 @@
-package com.lyloou.weibo.view;
+package com.lyloou.weibo.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,12 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyloou.weibo.R;
-import com.lyloou.weibo.app.AccessTokenKeeper;
-import com.lyloou.weibo.app.Constants;
-import com.lyloou.weibo.app.MyApplication;
+import com.lyloou.weibo.util.AccessTokenKeeper;
+import com.lyloou.weibo.constant.Constants;
+import com.lyloou.weibo.constant.MyApplication;
 import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
-import com.lyloou.weibo.util.NetUtil;
 import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
@@ -53,22 +49,38 @@ public class LoginActivity extends Activity implements OnClickListener {
         loginBtn.setOnClickListener(this);
         addUserBtn.setOnClickListener(this);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
-        progressDialog.setMessage("正在加载......");
-//        progressDialog.setCancelable(false);
-        progressDialog.show();
 
         // 获取本地accessToken,如果有的话.
         accessToken = AccessTokenKeeper.readAccessToken(this);
-        if (accessToken!=null && !TextUtils.isEmpty(accessToken.getToken())) {
+
+        if(accessToken == null || TextUtils.isEmpty(accessToken.getToken())){
+            // 授权信息初始化
+//            initUserInfo();
+            //不让他自动跳转，需要手动添加。
+        }
+        if (accessToken != null && !TextUtils.isEmpty(accessToken.getToken())) {
+            //已经登陆过的话，就去加载用户信息。
+            final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+            progressDialog.setMessage("正在加载用户信息......");
+            progressDialog.show();
+
             UsersAPI usersAPI = new UsersAPI(this, Constants.APP_KEY, accessToken);
             usersAPI.show(Long.parseLong(accessToken.getUid()), new RequestListener() {
                 @Override
                 public void onComplete(String response) {
+                    progressDialog.dismiss();
+
+                    /*
+                    // 如果以前登陆过，则直接登录
+                    MyApplication.accessToken = accessToken;
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivityForResult(intent, 0);
+                    */
+
                     Log.d(LU.TAG, "===============" + response);
                     user = User.parse(response);
                     String userName = null;
-                    if(user!=null) {
+                    if (user != null) {
                         userName = user.name;
                         //更换用户名称
                         userText.setText(userName);
@@ -94,7 +106,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                             });
                     AlertDialog alert = builder.create();
                     alert.show();
-                    progressDialog.dismiss();
+
                 }
 
                 @Override
@@ -103,29 +115,23 @@ public class LoginActivity extends Activity implements OnClickListener {
                 }
             });
 
-//            String userName = accessToken.getUid();
 
-//            // 弹出是否登陆
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setMessage("「"+userName + "」已登陆,是否继续使用此账号登陆?")
-//                    .setCancelable(false)
-//                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            MyApplication.accessToken = accessToken;
-//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                            startActivity(intent);
-//                        }
-//                    })
-//                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            dialog.cancel();
-//                        }
-//                    });
-//            AlertDialog alert = builder.create();
-//            alert.show();
         }
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==0){
+            this.finish();
+        }
+    }
+
+    private void initUserInfo() {
+        AuthInfo mAuthInfo = new AuthInfo(this, Constants.APP_KEY, Constants.REDIRECT_URL, Constants.SCOPE);
+        SsoHandler mSsoHandler = new SsoHandler(LoginActivity.this, mAuthInfo);
+        mSsoHandler.authorizeWeb(new AuthListener()); //通过网页授权
     }
 
 
@@ -138,9 +144,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         switch (v.getId()) {
             case R.id.id_auth_add_user_btn:
                 // 授权信息初始化
-                AuthInfo mAuthInfo = new AuthInfo(this, Constants.APP_KEY, Constants.REDIRECT_URL, Constants.SCOPE);
-                SsoHandler mSsoHandler = new SsoHandler(LoginActivity.this, mAuthInfo);
-                mSsoHandler.authorizeWeb(new AuthListener()); //通过网页授权
+                initUserInfo();
                 break;
             case R.id.id_auth_login_btn:
                 //如果用户已经登陆过,则可以使用此按钮

@@ -1,4 +1,4 @@
-package com.lyloou.weibo.view;
+package com.lyloou.weibo.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyloou.weibo.R;
-import com.lyloou.weibo.app.Constants;
-import com.lyloou.weibo.app.MyApplication;
+import com.lyloou.weibo.constant.Constants;
+import com.lyloou.weibo.constant.MyApplication;
 import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
 import com.sina.weibo.sdk.exception.WeiboException;

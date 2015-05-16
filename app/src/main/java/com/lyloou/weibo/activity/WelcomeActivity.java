@@ -1,4 +1,4 @@
-package com.lyloou.weibo.view;
+package com.lyloou.weibo.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -36,26 +34,7 @@ public class WelcomeActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		aa.setAnimationListener(new AnimationListener() {
 
-			@Override
-			public void onAnimationStart(Animation animation) {
-
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation animation) {
-
-			}
-
-			@Override
-			public void onAnimationEnd(Animation animation) {
-				/*
-				Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-				startActivity(intent);
-				*/
-			}
-		});
 	}
 
 }
