@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,6 +64,8 @@ public class MainActivity extends Activity implements OnClickListener {
                         Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
+                LU.log("Main执行退出之前");
+                this.setResult(0);
                 this.finish();
 //                System.exit(0);
             }

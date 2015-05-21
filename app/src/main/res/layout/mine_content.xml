@@ -22,6 +22,7 @@
 
             <!-- 个人信息:图像, 名称, 简介 -->
             <LinearLayout
+                android:id="@+id/id_mine_user_info_llyt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/mine_item_bg"
@@ -33,6 +34,7 @@
                 android:paddingTop="8dp">
 
                 <ImageView
+                    android:id="@+id/id_mine_user_head_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/home_border"
@@ -45,23 +47,25 @@
                     android:padding="8dp">
 
                     <TextView
+                        android:id="@+id/id_mine_user_name_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:drawablePadding="8dp"
                         android:drawableRight="@mipmap/user_level"
                         android:gravity="center_vertical"
-                        android:text="爍臻子"
+                        android:text="用户名"
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/id_mine_user_description_tv"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:ellipsize="end"
                         android:gravity="center_vertical"
                         android:singleLine="true"
-                        android:text="简介:人生路交给自己掌握, 无论是杯具, 是辉煌, 都会有自己的灵魂在「游荡」--这样才能最深处地靠自己的心灵来思考, 真正意义的走上自信, 果断..." />
+                        android:text="简介:。。。" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -75,6 +79,7 @@
                 android:layout_height="wrap_content">
 
                 <LinearLayout
+                    android:id="@+id/id_mine_count_weibo_llyt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -84,10 +89,11 @@
                     android:padding="6dp">
 
                     <TextView
+                        android:id="@+id/id_mine_count_weibo_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="268"
+                        android:text="0"
                         android:textColor="#000000"
                         android:textSize="16sp" />
 
@@ -101,6 +107,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/id_mine_count_follow_llyt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -110,10 +117,11 @@
                     android:padding="6dp">
 
                     <TextView
+                        android:id="@+id/id_mine_count_follow_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="108"
+                        android:text="0"
                         android:textColor="#000000"
                         android:textSize="16sp" />
 
@@ -127,6 +135,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/id_mine_count_fans_llyt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -136,10 +145,11 @@
                     android:padding="6dp">
 
                     <TextView
+                        android:id="@+id/id_mine_count_fans_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="666"
+                        android:text="0"
                         android:textColor="#000000"
                         android:textSize="16sp" />
 

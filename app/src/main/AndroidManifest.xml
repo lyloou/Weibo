@@ -27,6 +27,8 @@
         <activity android:name=".activity.WeiboDetailActivity" />
         <activity android:name=".activity.WeiboUpdateActivity" />
         <activity android:name=".activity.WeiboCommentActivity" />
+        <activity android:name=".activity.MineWeiboActivity" />
+        <activity android:name=".activity.MineFollowActivity" />
 
 
         <activity

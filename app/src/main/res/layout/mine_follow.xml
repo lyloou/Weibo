@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/home_border"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/id_mine_follow_top_include"
+        layout="@layout/mine_follow_top" />
+
+    <TextView
+        android:id="@+id/id_mine_follow_loadtext_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="正在加载..."
+        android:textSize="18sp"
+        android:visibility="visible" />
+
+    <ListView
+        android:id="@+id/id_mine_follow_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#00000000"
+        android:dividerHeight="18dp"
+        android:visibility="gone"/>
+
+
+</LinearLayout>

@@ -52,6 +52,7 @@ public class CommonUtil {
 
     }
 
+    //获取时间字符串
     public static String getTimeStr(Date oldTime, Date currentDate) {
         long time1 = currentDate.getTime();
 
@@ -72,6 +73,7 @@ public class CommonUtil {
     }
 
 
+    //获取用户图像
     public static void loadImageWithImgURLAndImageView(String imgUrl, final ImageView iv){
         Handler handler = new Handler() {
             @Override
@@ -88,6 +90,7 @@ public class CommonUtil {
     }
 
 
+    //异步加载图像
     private static void loadImage(final String userHeadUrl, final Handler handler) {
         new Thread(new Runnable() {
             @Override
@@ -109,6 +112,7 @@ public class CommonUtil {
     }
 
 
+    //改变字体颜色
     public static String atBlue(String s) {
 
         StringBuilder sb = new StringBuilder();
@@ -220,6 +224,7 @@ public class CommonUtil {
 
     }
 
+    //设置字体颜色
     public static String setTextColor(String s, String color) {
         String result = "<font color='" + color + "'>" + s + "</font>";
 

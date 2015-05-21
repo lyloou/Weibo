@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,64 +13,66 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyloou.weibo.R;
+import com.lyloou.weibo.activity.WeiboDetailActivity;
 import com.lyloou.weibo.adapter.WeiboMainAdapter;
 import com.lyloou.weibo.constant.Constants;
-import com.lyloou.weibo.util.CommonUtil;
-import com.lyloou.weibo.util.LU;
 import com.lyloou.weibo.constant.MyApplication;
-import com.lyloou.weibo.activity.WeiboDetailActivity;
-import com.lyloou.weibo.activity.WeiboUpdateActivity;
+import com.lyloou.weibo.util.LU;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
 import com.sina.weibo.sdk.openapi.StatusesAPI;
 import com.sina.weibo.sdk.openapi.models.Status;
 import com.sina.weibo.sdk.openapi.models.StatusList;
-import com.sina.weibo.sdk.openapi.models.User;
 
-
-public class HomeFragment extends BaseFragment {
-    // 设置点击「加载更多后」一次多少个微博
-    private static final int ADDED_ITEM_COUNT = 15;
-
+/**
+ * Created by lilou on 2015/5/14.
+ */
+public class MineWeiboFragment extends BaseFragment {
+    public static final String ARGUMENT = "mine_weibo_arg";
     private static int MAX_ID = 0;
-    private ListView listView;
-    private TextView loadText;
-    private TextView userNameText;
-    private User user;
-    private ImageView refreshImg;
-    private ImageView updateWeibo;
     private StatusesAPI mStatusesAPI;
-    private Button loadMoreBtn;
+    private static final int ADDED_ITEM_COUNT = 15;
     private int indexOld;
     private int topY;
+    private ListView listView;
+    private TextView loadText;
+    private Button loadMoreBtn;
+    private ImageView backIV;
+    private String userUID;
+
+
+    public static MineWeiboFragment newInstance(String arg) {
+        //数据传递
+        Bundle bundle = new Bundle();
+        bundle.putString(ARGUMENT, arg);
+        MineWeiboFragment mineWeiboFragment = new MineWeiboFragment();
+        mineWeiboFragment.setArguments(bundle);
+        return mineWeiboFragment;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        LU.log("1-onCreateView");
-        View view = inflater.inflate(R.layout.home, null);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            userUID = bundle.getString(ARGUMENT);
+        }
 
-        listView = (ListView) view.findViewById(R.id.id_home_lv);
-//        listView.setItemsCanFocus(false);
+    }
 
-        //首页等待加载数据文字
-        loadText = (TextView) view.findViewById(R.id.id_home_loadtext_tv);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        //首页用户名称
-        userNameText = (TextView) view.findViewById(R.id.id_home_top_username_tv);
+        View view = inflater.inflate(R.layout.mine_weibo, container, false);
+        //微博列表
+        listView = (ListView) view.findViewById(R.id.id_mine_weibo_lv);
+        //初始化时的加载页面
+        loadText = (TextView) view.findViewById(R.id.id_mine_weibo_loadtext_tv);
 
-        //刷新
-        refreshImg = (ImageView) view.findViewById(R.id.id_home_top_refresh_iv);
-        refreshImg.setClickable(true);
-
-        //写微博
-        updateWeibo = (ImageView) view.findViewById(R.id.id_home_top_compose_iv);
-        updateWeibo.setClickable(true);
-
-        // 在Listview下面添加「加载更多」
+        //加载更多按钮
         View loadMoreView = getActivity().getLayoutInflater().inflate(R.layout.home_load_more, null);
-        listView.addFooterView(loadMoreView);
         loadMoreBtn = (Button) loadMoreView.findViewById(R.id.id_home_load_more_btn);
+        listView.addFooterView(loadMoreView);
         loadMoreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,54 +81,26 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-        //加载列表
+        //设置返回
+        backIV = (ImageView) view.findViewById(R.id.id_mine_weibo_top_back_iv);
+        backIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
+
+        //初始化微博
         loadNewWeibo();
 
-        // 加载用户姓名
-        CommonUtil.setUserNameInTextView(getActivity(), MyApplication.accessToken, userNameText);
-
-
-        //刷新列表
-        refreshImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.refresh_anim);
-                refreshImg.startAnimation(animation);
-                loadNewWeibo();
-            }
-        });
-
-        //写微博
-        updateWeibo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WeiboUpdateActivity.class);
-                startActivityForResult(intent,0);
-            }
-        });
         return view;
     }
 
-    @Override
-    public String refresh(String str) {
-
-        return "主页";
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==0){
-            loadNewWeibo();
-        }
-    }
-
     //重新加载
-    private  void  loadNewWeibo() {
+    private void loadNewWeibo() {
         MAX_ID = 15;
         mStatusesAPI = new StatusesAPI(getActivity(), Constants.APP_KEY, MyApplication.accessToken);
-        mStatusesAPI.friendsTimeline(0L, 0L, MAX_ID, 1, false, 0, false, new WeiboRequestListener());
-//        mStatusesAPI.userTimeline(Long.parseLong(MyApplication.accessToken.getUid()),null,0L, 0L, MAX_ID, 1, false, 0, false, new WeiboRequestListener());
+        mStatusesAPI.userTimeline(Long.parseLong(userUID), null, 0L, 0L, MAX_ID, 1, false, 0, false, new WeiboRequestListener());
     }
 
     //加载更多微博
@@ -139,8 +111,7 @@ public class HomeFragment extends BaseFragment {
         View v = listView.getChildAt(0);
         topY = (v == null) ? 0 : v.getTop();
         loadMoreBtn.setText("请稍后......");
-        mStatusesAPI.friendsTimeline(0L, 0L, MAX_ID, 1, false, 0, false, new WeiboRequestListener());
-//        mStatusesAPI.userTimeline(Long.parseLong(MyApplication.accessToken.getUid()),null,0L, 0L, MAX_ID, 1, false, 0, false, new WeiboRequestListener());
+        mStatusesAPI.userTimeline(Long.parseLong(userUID), null, 0L, 0L, MAX_ID, 1, false, 0, false, new WeiboRequestListener());
     }
 
 
@@ -157,7 +128,7 @@ public class HomeFragment extends BaseFragment {
             final StatusList statuses = StatusList.parse(response);
 
 
-            if(statuses!=null) {
+            if (statuses != null) {
                 WeiboMainAdapter adapter = new WeiboMainAdapter(getActivity(), statuses.statusList);
                 listView.setAdapter(adapter);
                 loadText.setVisibility(View.GONE);
@@ -174,8 +145,6 @@ public class HomeFragment extends BaseFragment {
 
                     //表示是刷新或初始化;
                     listView.setVisibility(View.VISIBLE);
-                    //加载完成后,使刷新按钮停止.
-                    refreshImg.clearAnimation();
                 }
 
                 //设置监听事件, 点击item进入详细界面
@@ -199,5 +168,10 @@ public class HomeFragment extends BaseFragment {
         public void onWeiboException(WeiboException e) {
 
         }
+    }
+
+    @Override
+    public String refresh(String str) {
+        return null;
     }
 }

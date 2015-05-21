@@ -16,9 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyloou.weibo.R;
-import com.lyloou.weibo.util.AccessTokenKeeper;
 import com.lyloou.weibo.constant.Constants;
 import com.lyloou.weibo.constant.MyApplication;
+import com.lyloou.weibo.util.AccessTokenKeeper;
 import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
 import com.sina.weibo.sdk.auth.AuthInfo;
@@ -53,7 +53,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         // 获取本地accessToken,如果有的话.
         accessToken = AccessTokenKeeper.readAccessToken(this);
 
-        if(accessToken == null || TextUtils.isEmpty(accessToken.getToken())){
+        if (accessToken == null || TextUtils.isEmpty(accessToken.getToken())) {
             // 授权信息初始化
 //            initAuthInfo2();
             //不让他自动跳转，需要手动添加。
@@ -94,9 +94,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                             .setCancelable(false)
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    MyApplication.accessToken = accessToken;
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
+                                    startActivity(accessToken);
                                 }
                             })
                             .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -123,7 +121,9 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==0){
+        LU.log("执行退出之前");
+        if (resultCode == 0) {
+            LU.log("执行退出");
             this.finish();
         }
     }
@@ -149,9 +149,7 @@ public class LoginActivity extends Activity implements OnClickListener {
             case R.id.id_auth_login_btn:
                 //如果用户已经登陆过,则可以使用此按钮
                 if (!TextUtils.isEmpty(accessToken.getToken())) {
-                    MyApplication.accessToken = accessToken;
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    startActivity(accessToken);
                 } else {
                     Toast.makeText(this, "请点击「添加用户」!", Toast.LENGTH_SHORT).show();
                 }
@@ -165,16 +163,14 @@ public class LoginActivity extends Activity implements OnClickListener {
         public void onComplete(Bundle values) {
 
             // 从 Bundle 中解析 Token
-            Oauth2AccessToken mAccessToken = Oauth2AccessToken.parseAccessToken(values);
-            if (mAccessToken.isSessionValid()) {
+            accessToken = Oauth2AccessToken.parseAccessToken(values);
+            if (accessToken.isSessionValid()) {
                 // 保存 Token 到 SharedPreferences
-                AccessTokenKeeper.writeAccessToken(LoginActivity.this, mAccessToken);
+                AccessTokenKeeper.writeAccessToken(LoginActivity.this, accessToken);
                 Toast.makeText(LoginActivity.this,
                         "授权成功", Toast.LENGTH_SHORT).show();
                 Log.d(LU.TAG, "授权成功");
-                MyApplication.accessToken = mAccessToken;
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                startActivity(accessToken);
             } else {
                 // 以下几种情况，您会收到 Code：
                 // 1. 当您未在平台上注册的应用程序的包名与签名时；
@@ -205,4 +201,12 @@ public class LoginActivity extends Activity implements OnClickListener {
 
 
     }
+
+    public void startActivity(Oauth2AccessToken mAccessToken) {
+        MyApplication.accessToken = mAccessToken;
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivityForResult(intent,0);
+    }
+
+
 }

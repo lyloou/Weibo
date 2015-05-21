@@ -14,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lyloou.weibo.R;
+import com.lyloou.weibo.activity.MineWeiboActivity;
 import com.lyloou.weibo.constant.Constants;
 import com.lyloou.weibo.constant.MyApplication;
+import com.lyloou.weibo.fragment.MineWeiboFragment;
 import com.lyloou.weibo.util.CommonUtil;
 import com.lyloou.weibo.util.LU;
 import com.lyloou.weibo.activity.WeiboCommentActivity;
@@ -154,7 +156,11 @@ public class WeiboMainAdapter extends BaseAdapter {
             holder.weiboUserName.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    LU.log("我被点击了哦");
+                    LU.log("我是用户名哦");
+                    //接口已经关闭，下列代码不可使用。
+//                    Intent intent = new Intent(mContext, MineWeiboActivity.class);
+//                    intent.putExtra(MineWeiboFragment.ARGUMENT,status.user.id);
+//                    mContext.startActivity(intent);
                 }
             });
 
@@ -164,6 +170,9 @@ public class WeiboMainAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     LU.log("我是头像哦");
+//                    Intent intent = new Intent(mContext, MineWeiboActivity.class);
+//                    intent.putExtra(MineWeiboFragment.ARGUMENT,status.user.id);
+//                    mContext.startActivity(intent);
                 }
             });
 
