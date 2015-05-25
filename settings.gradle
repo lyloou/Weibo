@@ -1,1 +1,1 @@
-include ':stickyscrollviewitems', ':app', ':demo', ':WeiboSDK'
+include ':app', ':WeiboSDK'
